@@ -7,18 +7,16 @@
 	   
 	   float X,Y;
             System.out.print("Enter X: ");
-            X = sc.nextFloat();
-              System.out.print("Enter Y: ");
-            Y = sc.nextFloat();
+               X = sc.nextFloat();
+            System.out.print("Enter Y: ");
+               Y = sc.nextFloat();
             
             float arithmeticMean =(X+Y)/2;
             
             double harmonicMean = 2 / ( 1/X + 1/Y );
           
-           System.out.println("Arithmetic mean: " + arithmeticMean);
-        System.out.println("Harmonic   mean: " + harmonicMean);
-            
-            
-      
+            System.out.println("Arithmetic mean: " + arithmeticMean);
+            System.out.println("Harmonic   mean: " + harmonicMean);
+     
 	}
 }
