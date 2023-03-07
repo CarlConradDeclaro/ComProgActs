@@ -12,15 +12,10 @@
          
          System.out.print("Enter the number of seconds: ");
          t = scan.nextDouble();
-         
-       
-         
-         
+     
          double d = (double)1/2 * g* Math.pow(t,2);
         
-         System.out.printf("Distance: %.3f",d);
-         
-         
+         System.out.printf("Distance: %.3f",d);    
          
     }
 }
