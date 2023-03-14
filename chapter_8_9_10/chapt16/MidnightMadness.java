@@ -41,5 +41,5 @@ public class Main
                 System.out.print("The price is: " + nAdultTicket);
           }
       }
-	}
+   }
 }
