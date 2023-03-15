@@ -12,9 +12,11 @@ public class Main
         
             if(v < 3){
               System.out.println(temp);
-            }else if(temp > 50){
+            }
+     	    if(temp > 50){
                System.out.println(temp);  
-            }else{
+            }
+	     if(v < 3 == temp > 50) ){
                double windSpeed =  (35.74) + (0.6215*temp) - (35.75*( Math.pow(v,0.16)) ) + (0.4275*temp * Math.pow(v,0.16)) ;
              System.out.println(windSpeed);
             }
