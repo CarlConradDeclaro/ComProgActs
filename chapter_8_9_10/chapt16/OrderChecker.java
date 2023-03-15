@@ -1,4 +1,4 @@
- import java.util.Scanner;  
+  import java.util.Scanner;  
 
   class Main {
   public static void main(String[] args) {
@@ -22,12 +22,13 @@
         // check if order have at least as many nuts as bolts and at least twice as many washers as blots
          if(nuts<bolts){
             System.out.println("\nCheck the Order: too few nuts\n");
-         }else if(washers < 2*bolts){
+         }
+         if(washers < 2*bolts){
             System.out.println("\nCheck the Order: too few washers\n");
-         }else if (nuts > bolts && washers > 2* bolts){
+         }
+         if (nuts > bolts && washers > 2* bolts){
            System.out.println("\nThe program is Ok\n");
          }
-    
              System.out.println("Total cost " + total);
   }
 }
