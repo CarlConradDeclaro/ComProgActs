@@ -25,12 +25,11 @@
              if(packageA != packageB){
                  if(packageA < packageB){
                       BestValue =  "\nPackage A is the best value ";
-                 }else
+                 } 
                   BestValue =  "\nPackage B is the best value ";
              } 
              
           System.out.printf ("Package A cost per pound of lean: %.1f  \nPackage B cost per pound of lean: %.6f \n%s",packageA,packageB,BestValue);
- 
-            
+        
   }
 }
