@@ -1,4 +1,4 @@
-import java.util.Scanner;
+ import java.util.Scanner;
 public class Main
 {
 	public static void main(String[] args) {
@@ -23,12 +23,14 @@ public class Main
         if(age < 13){
           if(time <1700){
             System.out.print("The price is: " + aChildMatinee);
-          }else
+          }
              System.out.print("The price is: " + nChildTicket);
-        }else if(time <1700){
+        }
+        if(time <1700){
           System.out.print("The price is: " + adultMatinee);
-        }else
+        }
+        if(time>1700){
           System.out.print("The price is: " + nAdultTicket);
-            
+        }   
 	}
 }
