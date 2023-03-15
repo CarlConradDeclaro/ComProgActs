@@ -18,10 +18,11 @@
          MilesPerGallon = sc.nextInt();
     
          int remainingMiles = (Tankcapacity*Gage /100)* MilesPerGallon;
-         if(remainingMiles<=200){
+         if(remainingMiles<200){
               System.out.println("\nGet Gas! ");
-         }else 
+         }
+         if(remainingMiles>=200){
              System.out.println("\nSafe to Proceed ");
- 
+         }
   }
 }
