@@ -1,7 +1,6 @@
  import java.util.Scanner;  
  
-
-  class Main {
+ class Main {
   public static void main(String[] args) {
     Scanner sc = new Scanner(System.in);
    
@@ -16,8 +15,10 @@
              discount = amt/10;
              total = amt-discount;
              System.out.println("Discounted price: " + total);
-         }else
-            System.out.println("Total is: " + amt);
+         }
+         if(amtToDollars<10){
+           System.out.println("Total is: " + amt);
+         }
             
   }
 }
