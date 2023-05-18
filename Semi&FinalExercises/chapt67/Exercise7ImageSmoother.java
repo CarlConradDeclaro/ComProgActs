@@ -1,0 +1,40 @@
+import java.io.* ;
+
+public class Exercise7ImageSmoother
+{
+
+  public static void main ( String[] args )
+  {
+    int[][] image  = {{0,0,0,0,0,0,0,0,0,0,0,0},
+                      {0,0,0,0,0,0,0,0,0,0,0,0},
+                      {0,0,5,5,5,5,5,5,5,5,0,0},
+                      {0,0,5,5,5,5,5,5,5,5,0,0},
+                      {0,0,5,5,5,5,5,5,5,5,0,0},
+                      {0,0,5,5,5,5,5,5,5,5,0,0},
+                      {0,0,5,5,5,5,5,5,5,5,0,0},
+                      {0,0,5,5,5,5,5,5,5,5,0,0},
+                      {0,0,5,5,5,5,5,5,5,5,0,0},
+                      {0,0,5,5,5,5,5,5,5,5,0,0},
+                      {0,0,0,0,0,0,0,0,0,0,0,0},
+                      {0,0,0,0,0,0,0,0,0,0,0,0}};
+
+      int[][] smooth = new int[ image.length ][ image[0].length ];
+      
+       for ( int r=1; r<image.length-1; r++ ){
+             for ( int c=1; c<image[r].length-1; c++ ){
+                  int sum = image[r-1][c-1]+image[r-1][c]+ image[r-1][c+1] +         
+                            image[r][c-1]+ image[r][c]+image[r][c+1]+
+                            image[r+1][c-1]+image[r+1][c]+ image[r+1][c+1];
+                   smooth[r][c] = sum/9; 
+
+      }
+              
+    }
+      for ( int r=0; r<smooth.length; r++ ){
+             for ( int c=0; c<smooth[r].length; c++ ){
+                  System.out.print(smooth[r][c]);
+      }
+              System.out.println();
+    }
+  }
+}     
