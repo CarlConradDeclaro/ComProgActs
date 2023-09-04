@@ -1,0 +1,137 @@
+ 
+class User{
+   int UserId;
+   String Username;
+   String Email;
+      
+      User(int UserId,String Username, String Email ){
+          this.UserId = UserId;
+          this.Username = Username;
+          this.Email = Email;
+      }
+      
+      
+      void LogIn(){
+          System.out.println("Welcome");
+          System.out.println("Id: "+UserId +": "+ Username +", "+ Email);
+      }
+      
+        void LogOut(){
+          System.out.println("LogOut");
+      }
+      
+      
+}
+
+class Customer extends User{
+    
+     int customerId;
+     String Address;
+    
+    Customer(int UserId,String Username,String Email ,int customerId,String Address){
+        super(UserId,Username,Email);
+        
+        this.customerId = customerId;
+        this.Address = Address;
+    }
+    
+    void PlaceOrder(){
+        System.out.println("Place Order");
+        // System.out.println(Username);
+    }
+    void ViewOrderHistory(){
+        System.out.println("View Order History");
+    }
+    
+}
+
+class Admin extends User{
+    int AdminId;
+    String Department;
+    Admin(String Username,String Email ,int AdminId, String Department){
+        super(AdminId,Username,Email);
+        this.AdminId = AdminId;
+        this.Department = Department;
+    }
+    
+    void AddProduct(){
+        System.out.println("Add Product");
+    }
+    
+    void RemoveProduct(){
+        System.out.println("Remove Product");
+    }
+    
+    void ManageInventory(){
+        System.out.println("ManageInventory");
+    }
+    
+}
+
+
+
+class Product {
+    int ProductID;
+    String name;
+    int price;
+    int stockQuantity;
+    
+    Product(int ProductID,String name,int price,int stockQuantity, String Email){
+        this.ProductID = ProductID;
+        this.name = name;
+        this.price = price;
+        this.stockQuantity = stockQuantity;
+    }
+    
+    
+    void UpdatePrice(){
+        System.out.println("Update price");
+    }
+    
+    void UpdateStock(){
+        System.out.println("Update stock");
+    }
+    
+}
+
+class Order {
+    int OrderId;
+    int customerId;
+    int product[];
+    int totalAmount;
+    
+    Order(int OrderId, int customerId,int totalAmount){
+        this.OrderId = OrderId;
+        this.customerId = customerId;
+        this.totalAmount = totalAmount;
+    }
+    
+    
+    void CalculateTotalAmount(){
+        System.out.println("Calculate total amount");
+    }
+    
+    void AddProduct(){
+        System.out.println("Add product");
+    }
+    
+    void ConfirmOrder(){
+        System.out.println("Confirm order");
+    }
+    
+}
+
+
+
+public class Main{
+   public static void main(String[] args){
+     
+     Customer customer = new Customer(9807,"Conrad","1234@gmail.com",1234,"Address");
+      customer.LogIn();
+      customer.PlaceOrder();
+      customer.ViewOrderHistory();
+      customer.AddProduct();
+      customer.RemoveProduct();
+      customer.
+   }
+}
