@@ -1,137 +1,152 @@
- 
+  
 class User{
-   int UserId;
-   String Username;
-   String Email;
-      
-      User(int UserId,String Username, String Email ){
-          this.UserId = UserId;
-          this.Username = Username;
-          this.Email = Email;
-      }
-      
-      
-      void LogIn(){
-          System.out.println("Welcome");
-          System.out.println("Id: "+UserId +": "+ Username +", "+ Email);
-      }
-      
-        void LogOut(){
-          System.out.println("LogOut");
-      }
-      
-      
-}
 
+    int userId;
+    String userName;
+    String Email;
+
+    User(int userId,String userName,String Email){
+      this.userId= userId;
+      this.userName = userName;
+      this.Email=Email;
+    }
+
+    void LogIn(){
+        System.out.println(userName);
+    }
+    void LogOut(){
+    }
+}
 class Customer extends User{
-    
-     int customerId;
-     String Address;
-    
-    Customer(int UserId,String Username,String Email ,int customerId,String Address){
-        super(UserId,Username,Email);
-        
+
+    int customerId;
+    String address;
+    public Customer(int userId, String userName, String Email,int customerId,String address) {
+        super(userId, userName, Email);
         this.customerId = customerId;
-        this.Address = Address;
+        this.address= address;
     }
     
-    void PlaceOrder(){
-        System.out.println("Place Order");
-        // System.out.println(Username);
+    void placeOrder(Product[] products){
+        
+    
+         
     }
-    void ViewOrderHistory(){
-        System.out.println("View Order History");
+
+     
+    List<Order> orderHistory = new ArrayList<>();
+    
+    void addOrderToHistory(Order order){
+       orderHistory.add(order);
     }
     
+     
+    void viewOrderHistory( ){
+
+         if(orderHistory.isEmpty()){
+          System.out.println("No order history");
+         }else{
+            for(Order order: orderHistory ){
+                System.out.println("Order ID: " + order.orderId);
+                System.out.println("Order Date: " + order.orderDate);
+                System.out.println("Total Amount: $" + order.totalAmount);
+                System.out.println("-------------");
+            }
+         }
+
+    }
+
 }
 
 class Admin extends User{
-    int AdminId;
-    String Department;
-    Admin(String Username,String Email ,int AdminId, String Department){
-        super(AdminId,Username,Email);
-        this.AdminId = AdminId;
-        this.Department = Department;
+    int adminId;
+    String department;
+    public Admin(int userId, String userName, String Email,int adminId,String department) {
+        super(userId, userName, Email);
+        this.adminId=adminId;
+        this.department=department;
     }
-    
-    void AddProduct(){
-        System.out.println("Add Product");
-    }
-    
-    void RemoveProduct(){
-        System.out.println("Remove Product");
-    }
-    
-    void ManageInventory(){
-        System.out.println("ManageInventory");
-    }
-    
 }
 
+class Product{
+     int productId;
+     String name;
+     int price;
+     int stockQuantity;
 
-
-class Product {
-    int ProductID;
-    String name;
-    int price;
-    int stockQuantity;
-    
-    Product(int ProductID,String name,int price,int stockQuantity, String Email){
-        this.ProductID = ProductID;
-        this.name = name;
-        this.price = price;
+     Product(int productId,String name,int price,int stockQuantity){
+        this.productId=productId;
+        this.name=name;
+        this.price=price;
         this.stockQuantity = stockQuantity;
-    }
-    
-    
-    void UpdatePrice(){
-        System.out.println("Update price");
-    }
-    
-    void UpdateStock(){
-        System.out.println("Update stock");
-    }
-    
+     }
+
+     void UpdatePrice(){
+
+     }
+
+     void UpdateStock(){
+     }
+
 }
 
-class Order {
-    int OrderId;
-    int customerId;
-    int product[];
-    int totalAmount;
-    
-    Order(int OrderId, int customerId,int totalAmount){
-        this.OrderId = OrderId;
+class Order{
+   int orderId;
+   int customerId;
+   Product[] products;
+   int totalAmount;
+   int orderDate;
+
+   Order(int orderId,int customerId,Product[] products,int totalAmount,int orderDate){
+        this.orderId = orderId;
         this.customerId = customerId;
+        this.products = products;
         this.totalAmount = totalAmount;
-    }
-    
-    
-    void CalculateTotalAmount(){
-        System.out.println("Calculate total amount");
-    }
-    
-    void AddProduct(){
-        System.out.println("Add product");
-    }
-    
-    void ConfirmOrder(){
-        System.out.println("Confirm order");
-    }
-    
+        this.orderDate = orderDate;
+   }
+
+   void calculateTotalAmount(){
+       for(Product prods : products){
+         totalAmount+=prods.price;
+       }
+   }
+
+   void addProductToOrder(){
+   }
+
+   void confirmOrder(){
+   }
+
+
 }
 
 
 
-public class Main{
-   public static void main(String[] args){
-     
-     Customer customer = new Customer(9807,"Conrad","1234@gmail.com",1234,"Address");
-      customer.LogIn();
-      customer.PlaceOrder();
-      customer.ViewOrderHistory();
-      customer.AddProduct();
-      customer.RemoveProduct();
-      customer.
-   }
+public class Inhiretance {
+
+    public static void main(String[] args) {
+
+        User user1 = new User(1, "JohnDoe", "john@example.com");
+        Customer customer1 = new Customer(2, "AliceSmith", "alice@example.com", 101, "123 Main St");
+        Admin admin1 = new Admin(3, "AdminUser", "admin@example.com", 201, "IT Department");
+
+        // Create products
+        Product product1 = new Product(101, "Laptop", 1000, 10);
+        Product product2 = new Product(102, "Smartphone", 500, 20);
+        Product product3 = new Product(103, "Tablet", 300, 15);
+
+        // Create an order with products
+        Product[] productsInOrder = { product1, product2, product3 };
+        Order order1 = new Order(1, customer1.customerId, productsInOrder, 0, 20230904);
+        
+        // Calculate the total amount for the order
+//        customer1.placeOrder();
+        order1.calculateTotalAmount();
+        
+       
+        
+//        customer1.addOrderToHistory(order1);
+//        customer1.viewOrderHistory();
+        customer1.LogIn();
+    }
 }
