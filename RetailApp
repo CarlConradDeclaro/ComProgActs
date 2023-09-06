@@ -1,4 +1,13 @@
-  
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.*;
+
+/**
+ *
+ * @author carlconrad
+ */
+
 class User{
 
     int userId;
@@ -10,7 +19,7 @@ class User{
       this.userName = userName;
       this.Email=Email;
     }
-
+    
     void LogIn(){
         System.out.println(userName);
     }
@@ -21,38 +30,38 @@ class Customer extends User{
 
     int customerId;
     String address;
+     
+    
+    
+    Customer(){
+     super(0,"","");
+    }
     public Customer(int userId, String userName, String Email,int customerId,String address) {
         super(userId, userName, Email);
         this.customerId = customerId;
-        this.address= address;
+        this.address= address;      
+       
     }
     
-    void placeOrder(Product[] products){
-        
-    
-         
+    void placeOrder(Admin admin){   
+      List<Product> prod = admin.products;
+      for(Product prodt : prod){
+      System.out.println("{" + "id: " + prodt.productId + "\t name: " + prodt.name + "\t price: " + prodt.price + "\t Quantity: " + prodt.stockQuantity + "}");
+       }
+           
     }
 
      
-    List<Order> orderHistory = new ArrayList<>();
+   
+    
+   
     
     void addOrderToHistory(Order order){
-       orderHistory.add(order);
+      
     }
     
      
     void viewOrderHistory( ){
-
-         if(orderHistory.isEmpty()){
-          System.out.println("No order history");
-         }else{
-            for(Order order: orderHistory ){
-                System.out.println("Order ID: " + order.orderId);
-                System.out.println("Order Date: " + order.orderDate);
-                System.out.println("Total Amount: $" + order.totalAmount);
-                System.out.println("-------------");
-            }
-         }
 
     }
 
@@ -61,11 +70,90 @@ class Customer extends User{
 class Admin extends User{
     int adminId;
     String department;
-    public Admin(int userId, String userName, String Email,int adminId,String department) {
+    
+     Scanner sc = new Scanner(System.in);
+   Admin(){
+   super(0,"","");
+   }
+     Admin(int userId, String userName, String Email,int adminId,String department) {
         super(userId, userName, Email);
         this.adminId=adminId;
         this.department=department;
     }
+    
+    
+    
+     List<Product> products = new ArrayList<>();   
+    
+     void defaultProducts(){
+       Product prod1 = new Product(1,"Laptop",30,50);
+       Product prod2 = new Product(2,"Cellphone",20,50);
+       Product prod3 = new Product(3,"Tablet",10,50); 
+       
+       products.add(prod1);
+       products.add(prod2);
+       products.add(prod3);      
+     }
+     
+     
+     
+     
+     void addProduct(){
+         
+          System.out.print("Enter Product Id: ");
+          int prodId =  sc.nextInt();
+          
+          sc.nextLine();
+          System.out.print("Enter Name: ");
+          String prodName = sc.nextLine();
+          
+          System.out.print("Enter Price: ");
+          int prodPrice = sc.nextInt();
+          
+          System.out.print("Enter Stock Quantity");
+          int stockQty =sc.nextInt();
+                  
+          Product prod  = new Product(prodId,prodName,prodPrice,stockQty);
+          products.add(prod);
+     }
+     
+     void RemoveProduct(int x){
+         for(Product prod: products){
+            if(prod.productId == x){
+             products.remove(prod);
+             return;
+            }
+         }
+     }
+     
+     void ManageInventory(){
+         
+          System.out.print("Enter Id to Update ");
+          int id = sc.nextInt();
+          
+          for(Product prod: products){
+             if(prod.productId == id){
+              System.out.print("Update Price: ");
+               int prodPrice = sc.nextInt();
+          
+              System.out.print("Update Stock Quantity");
+              int stockQty =sc.nextInt();
+              
+              prod.price = prodPrice;
+              prod.stockQuantity = stockQty;
+              return;
+             }
+          }
+     }
+     
+     
+     
+      
+    void displayProds() {
+        for (Product prodt : products) {         
+          System.out.println("{" + "id: " + prodt.productId + "\t name: " + prodt.name + "\t price: " + prodt.price + "\t Quantity: " + prodt.stockQuantity + "}");
+        }         
+    }  
 }
 
 class Product{
@@ -73,6 +161,9 @@ class Product{
      String name;
      int price;
      int stockQuantity;
+     Product prod;
+     
+     
 
      Product(int productId,String name,int price,int stockQuantity){
         this.productId=productId;
@@ -80,14 +171,19 @@ class Product{
         this.price=price;
         this.stockQuantity = stockQuantity;
      }
+     
+    
+     void PlaceOrder(){
+          
+     }
 
      void UpdatePrice(){
-
      }
 
      void UpdateStock(){
      }
-
+     
+   
 }
 
 class Order{
@@ -96,7 +192,12 @@ class Order{
    Product[] products;
    int totalAmount;
    int orderDate;
-
+    ArrayList<Product> order = new ArrayList<>();
+   Scanner sc = new Scanner(System.in);
+   
+   Order(){
+       
+   }
    Order(int orderId,int customerId,Product[] products,int totalAmount,int orderDate){
         this.orderId = orderId;
         this.customerId = customerId;
@@ -104,15 +205,36 @@ class Order{
         this.totalAmount = totalAmount;
         this.orderDate = orderDate;
    }
-
+    int total =0;
    void calculateTotalAmount(){
-       for(Product prods : products){
-         totalAmount+=prods.price;
+       for(Product prods : order){
+         total+=prods.price;
        }
+       System.out.println(total);
    }
+ 
+   void addProductToOrder(Admin admin){
+       List<Product> prods = admin.products;
+       
+       System.out.print("Enter id to add: ");
+       int id = sc.nextInt();
+       
+       
+       for(Product product : prods){
+           if(product.productId == id){
+               order.add(product);
+             
+           }
+       }
 
-   void addProductToOrder(){
    }
+   
+       void printOrder(){
+           for(Product ordr : order){
+                   System.out.println("{" + "id: " + ordr.productId + "\t name: " + ordr.name + "\t price: " + ordr.price + "\t Quantity: " + ordr.stockQuantity + "}");
+           }
+   }
+       
 
    void confirmOrder(){
    }
@@ -125,28 +247,18 @@ class Order{
 public class Inhiretance {
 
     public static void main(String[] args) {
-
-        User user1 = new User(1, "JohnDoe", "john@example.com");
-        Customer customer1 = new Customer(2, "AliceSmith", "alice@example.com", 101, "123 Main St");
-        Admin admin1 = new Admin(3, "AdminUser", "admin@example.com", 201, "IT Department");
-
-        // Create products
-        Product product1 = new Product(101, "Laptop", 1000, 10);
-        Product product2 = new Product(102, "Smartphone", 500, 20);
-        Product product3 = new Product(103, "Tablet", 300, 15);
-
-        // Create an order with products
-        Product[] productsInOrder = { product1, product2, product3 };
-        Order order1 = new Order(1, customer1.customerId, productsInOrder, 0, 20230904);
+         Admin  p1 =  new Admin( );
+        Customer  p =  new Customer();
+         Order order = new Order();
+        p1.defaultProducts();     
         
-        // Calculate the total amount for the order
-//        customer1.placeOrder();
-        order1.calculateTotalAmount();
+        p.placeOrder(p1);
         
-       
-        
-//        customer1.addOrderToHistory(order1);
-//        customer1.viewOrderHistory();
-        customer1.LogIn();
+        order.addProductToOrder(p1);
+        order.printOrder();
+        order.calculateTotalAmount();
+            
+ 
     }
 }
+
