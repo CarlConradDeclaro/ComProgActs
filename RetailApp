@@ -1,4 +1,4 @@
-
+ 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.*;
@@ -173,9 +173,7 @@ class Product{
      }
      
     
-     void PlaceOrder(){
-          
-     }
+    
 
      void UpdatePrice(){
      }
@@ -192,7 +190,8 @@ class Order{
    Product[] products;
    int totalAmount;
    int orderDate;
-    ArrayList<Product> order = new ArrayList<>();
+   ArrayList<Product> order = new ArrayList<>();
+   List<Product> orderHistory = new ArrayList<>();
    Scanner sc = new Scanner(System.in);
    
    Order(){
@@ -206,24 +205,26 @@ class Order{
         this.orderDate = orderDate;
    }
     int total =0;
-   void calculateTotalAmount(){
+   int  calculateTotalAmount(){
        for(Product prods : order){
          total+=prods.price;
        }
-       System.out.println(total);
+      return total;
    }
- 
+  
    void addProductToOrder(Admin admin){
        List<Product> prods = admin.products;
+       Customer c = new Customer();
        
        System.out.print("Enter id to add: ");
        int id = sc.nextInt();
        
-       
+       int idOrder = 0001;
        for(Product product : prods){
            if(product.productId == id){
+               Order order = new Order(idOrder,c.customerId);
                order.add(product);
-             
+               idOrder++;
            }
        }
 
@@ -231,12 +232,26 @@ class Order{
    
        void printOrder(){
            for(Product ordr : order){
-                   System.out.println("{" + "id: " + ordr.productId + "\t name: " + ordr.name + "\t price: " + ordr.price + "\t Quantity: " + ordr.stockQuantity + "}");
+               System.out.println("Orders: ");
+               System.out.println("{" + "id: " + ordr.productId + "\t name: " + ordr.name + "\t price: " + ordr.price + "\t Quantity: " + ordr.stockQuantity + "}");
            }
    }
        
-
-   void confirmOrder(){
+   
+   void confirmOrder(Admin admin){
+       
+      List<Product> prods = admin.products;
+      
+      for(Product prod: order){
+        orderHistory.add(prod);
+      } 
+   }
+   
+   void orderHistory(){
+      for(Product prod: orderHistory){
+             System.out.println("Orders History: ");
+               System.out.println("{" + "id: " + prod.productId + "\t name: " + prod.name + "\t price: " + prod.price + "\t Quantity: " + prod.stockQuantity + "}");         
+      }
    }
 
 
@@ -244,21 +259,21 @@ class Order{
 
 
 
-public class Inhiretance {
+public class Retail {
 
     public static void main(String[] args) {
-         Admin  p1 =  new Admin( );
+        Admin  p1 =  new Admin( );
         Customer  p =  new Customer();
-         Order order = new Order();
+        Order order = new Order();
         p1.defaultProducts();     
         
         p.placeOrder(p1);
         
         order.addProductToOrder(p1);
         order.printOrder();
-        order.calculateTotalAmount();
-            
- 
+        order.confirmOrder(p1);
+        order.orderHistory();
+        
     }
 }
 
