@@ -1,4 +1,15 @@
- 
+ /*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Project/Maven2/JavaApp/src/main/java/${packagePath}/${mainClassName}.java to edit this template
+ */
+
+package com.mycompany.retail;
+
+/**
+ *
+ * @author xx801
+ */
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.*;
@@ -186,24 +197,19 @@ class Product{
 
 class Order{
    int orderId;
-   int customerId;
-   Product[] products;
+   int customerId; 
    int totalAmount;
    int orderDate;
    ArrayList<Product> order = new ArrayList<>();
    List<Product> orderHistory = new ArrayList<>();
    Scanner sc = new Scanner(System.in);
    
-   Order(){
-       
+   Order(){}
+   Order(int orderId,int customerId,List<Product> list){
+       this.orderId = orderId;
+       this.customerId =customerId;     
    }
-   Order(int orderId,int customerId,Product[] products,int totalAmount,int orderDate){
-        this.orderId = orderId;
-        this.customerId = customerId;
-        this.products = products;
-        this.totalAmount = totalAmount;
-        this.orderDate = orderDate;
-   }
+ 
     int total =0;
    int  calculateTotalAmount(){
        for(Product prods : order){
@@ -211,6 +217,7 @@ class Order{
        }
       return total;
    }
+   
   
    void addProductToOrder(Admin admin){
        List<Product> prods = admin.products;
@@ -221,9 +228,8 @@ class Order{
        
        int idOrder = 0001;
        for(Product product : prods){
-           if(product.productId == id){
-               Order order = new Order(idOrder,c.customerId);
-               order.add(product);
+           if(product.productId == id){             
+              order.add(product);
                idOrder++;
            }
        }
@@ -276,4 +282,3 @@ public class Retail {
         
     }
 }
-
