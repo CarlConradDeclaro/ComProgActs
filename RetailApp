@@ -1,434 +1,325 @@
- 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.*;
+import java.time.LocalDate;
+/**
+ *
+ * @author carlconrad
+ */
 
 class User{
-
-    int userId;
-    String userName;
-    String Email;
-
-    User(String userName,int userId,String Email){
-      this.userId= userId;
-      this.userName = userName;
-      this.Email=Email;
-    }
-    
-    void LogIn(){
-        System.out.println("Welcome: "+userName +" "+ Email +" "+userId );
-    }
-    void LogOut(){
-    }
-
+   int userId;
+   String userName;
+   String email;
+   
+   User(int userId,String userName,String email){
+    this.userId = userId;
+    this.userName =userName;
+    this.email= email;
+   } 
+   void LogIn(){
+        System.out.println("\nWelcome: "+userId +" "+ userName +" "+email +"\n" );
+   }
+   void LogOut(){
+        System.out.println("LogOut SuccesFully");
+   }
 }
-class Customer extends User{
 
+class Customer extends User{
+  
     int customerId;
     String address;
-    
-    public Customer( String userName, String Email,int userId,String address) {
-        super( userName,userId, Email);
-         
-        customerId = userId;
-        this.address= address;     
-        
+    Order order;
+   
+    public Customer(int userId,String userName,String email,int customerId,String address) {
+        super( userId,userName, email);     
+        this.customerId = customerId;
+        this.address= address;       
+         order = new Order();
+     }   
+    void placeOrder(Admin prods){ 
+        Order order = new Order();
+        prods.printProduct();        
     }
-
-    void placeOrder(Admin admin){  
-        Product prod = new Product();
-         admin.defaultProducts();
-         admin.displayProds();
-         
-    
-//      List<Product> prod = admin.products;
-//      for(Product prodt : prod){
-//      System.out.println("{" + "id: " + prodt.productId + "\t name: " + prodt.name + "\t price: " + prodt.price + "\t Quantity: " + prodt.stockQuantity + "}");
-//       }         
-    }
-     
-    void viewOrderHistory(Order order){       
-        List<Order> orderHistory = new ArrayList<>(); 
-         
-        System.out.println("\n \tOrders History: ");     
-        int tots = 0;
-         for(Order ordHist : order.orderHistory){                           
-                orderHistory.add(ordHist); 
-                tots+=ordHist.price;
-          }
-          LocalDate currentDate = LocalDate.now();
-          System.out.println("\nOrder id: "+order.idOrder + "\nCustomer id: " +  userId + "\n" + "Current Date: " + currentDate + "\n");            
-          
-                for(Order prod: orderHistory){ 
-                    if(prod.orderId == order.orderId)
-                       System.out.println("{" + "id: " + prod.prodID + "\t name: " + prod.name + "\t price: " + prod.price +  "}");         
-                    
+    void viewOrderHistory(Order orderHistory){
+      LocalDate currentDate = LocalDate.now();
+      System.out.println("\n\tOrder History\n");        
+      for (Map.Entry<Integer, List<Product>> entry : orderHistory.hash.entrySet()) {
+                int key = entry.getKey();
+                List<Product> productList = entry.getValue();
+                System.out.println("Customer Id: "+  userId  +"\nOrder id: " + key + " \nDate: " + currentDate );
+                int total = 0;
+                for (Product product : productList) {
+                    System.out.println("Id: " + product.productId + " Name: " + product.name + " price: " + product.price);
+                    total+=product.price;
                 }
-       
-         
-         
-        System.out.println("TOTAL: " + tots + "\n");
+                System.out.println("Total: "+total + "\n");
+      }    
     }
-
 }
 
-class Admin extends User{
-    int adminId;
-    String department;
-    Product prods = new Product();
-    
+ class Admin extends User{
+     int adminId;
+     String department;
+     List<Product> products = new ArrayList<>();
      Scanner sc = new Scanner(System.in);
-     
-     Admin( String userName, String Email,int userId,int adminId,String department) {
-        super( userName,userId, Email);
-        this.adminId=adminId;
-        this.department=department;
-    }
-
-     List<Product> products = new ArrayList<>();   
-    
-     void defaultProducts(){
-       Product prod1 = new Product(1,"iPhone 15",30,50);
-       Product prod2 = new Product(2,"Air Force 1",20,50);
-       Product prod3 = new Product(3,"Apple Watch",10,50); 
-       
-       products.add(prod1);
-       products.add(prod2);
-       products.add(prod3);      
-     }
-     
-
-     Product makeProduct (){
-         
-          System.out.print("Enter Product Id: ");
-          int prodId =  sc.nextInt();         
-          sc.nextLine();
-          System.out.print("Enter Name: ");
-          String prodName = sc.nextLine();         
-          System.out.print("Enter Price: ");
-          int prodPrice = sc.nextInt();      
-          System.out.print("Enter Stock Quantity");
-          int stockQty =sc.nextInt();
-                  
-          return new Product(prodId,prodName,prodPrice,stockQty);
-         // products.add(prod);
-     }
-     
-     void addProduct(Product prod){
-       prod = makeProduct();
-       products.add(prod);
-     }
-     
-     void RemoveProduct(int x){
-         for(Product prod: products){
-            if(prod.productId == x){
-             products.remove(prod);
-             return;
-            }
-         }
-     }
-     
-     void ManageInventory(){
-         
-         System.out.println("Inventory Management");
-         System.out.println(" 1, Update Price \n 2, Update Stock");
-         int choice = sc.nextInt();
-         
-         switch(choice){
-             case 1: 
-                   displayProds();
-                   prods.UpdatePrice(this);
-                   break;
-             case 2:
-                  displayProds();
-                  prods.UpdateStock(this);
-                  break;
-             default:      
-                 System.out.println("Incorrect input");
-                  
-         }
-        
-         
-     }
-      
-    void displayProds() {
-        for (Product prodt : products) {         
-          System.out.println("{" + "id: " + prodt.productId + "\t name: " + prodt.name + "\t price: " + prodt.price + "\t Quantity: " + prodt.stockQuantity + "}");
-        }         
+              
+     Admin(int userId,String userName,String email,int adminId,String department) {
+            super(userId,userName,email);
+            this.adminId = adminId;
+            this.department = department;          
+        }   
+  void madeProduct(){
+            Product prod1 = new Product(1,"iPhone 15",30,50);
+            Product prod2 = new Product(2,"Air Force 1",20,50);
+            Product prod3 = new Product(3,"Apple Watch",10,50); 
+            products.add(prod1);
+            products.add(prod2);
+            products.add(prod3);        
+      } 
+    Product makeProduct() {
+        System.out.print("Enter Product Id: ");
+        int prodId = sc.nextInt();
+        sc.nextLine();
+        System.out.print("Enter Name: ");
+        String prodName = sc.nextLine();
+        System.out.print("Enter Price: ");
+        int prodPrice = sc.nextInt();
+        sc.nextLine();
+        System.out.print("Enter Stock Quantity: ");
+        int stockQty = sc.nextInt();
+        return new Product(prodId, prodName, prodPrice, stockQty);      
     }  
-}
+    void addProduct(){
+      products.add(makeProduct());
+    }        
+    void printProduct(){       
+           for(Product prod : products){
+            System.out.println("[id: "+prod.productId +", Name: "+prod.name+", Price: "+ prod.price + "., Quantity: "+ prod.stockQty);
+          }          
+      }  
+    void removeProduct(){
+        System.out.println("Enter id to remove:");
+        int x = sc.nextInt();       
+        for(Product prod : products){
+           if(prod.productId == x){
+               products.remove(x);          
+               return;
+           }
+        }
+    }
+    void manageInventory(Admin product){
+      Product manageInven =  new Product();
+      System.out.println("\n 1,Update Price \n2, Update Stock : ");
+      int ans = sc.nextInt();
+      product.printProduct();
+      if(ans == 1)
+          manageInven.updatePrice(product);
+      else if(ans == 2)
+          manageInven.updateStock(product);
+    }
+ }
 
 class Product{
-     int productId;
-     String name;
-     int price;
-     int stockQuantity;
-     
-     Scanner sc = new Scanner(System.in);
-     
-     Product(){
-    
-     }
-
-     Product(int productId,String name,int price,int stockQuantity){
-        this.productId=productId;
-        this.name=name;
-        this.price=price;
-        this.stockQuantity = stockQuantity;
-     }
-     
-    
-    
-
-     void UpdatePrice(Admin prods){
-         List<Product> products = prods.products;
-          System.out.print("Enter Id to Update ");
-          int id = sc.nextInt();
-          
-          for(Product prod: products){
-             if(prod.productId == id){
-                System.out.print("Update Price: ");
-                int prodPrice = sc.nextInt(); 
-              
-                prod.price = prodPrice;  
-                return;
-             }
-          }
-     }
-
-     void UpdateStock(Admin prods){
-          List<Product> products = prods.products;
-          System.out.print("Enter Id to Update ");
-          int id = sc.nextInt();
-          
-          for(Product prod: products){
-             if(prod.stockQuantity == id){
-                System.out.print("Update Quantity: ");
-                int qty = sc.nextInt(); 
-              
-                prod.stockQuantity = qty;  
-                return;
-             }
-          }
+      int productId;
+      String name;
+      int price;
+      int stockQty;
+      Scanner sc = new Scanner(System.in);
+      Product(){}
+      Product(int productId,String name,int price,int stockQty){
+        this.productId = productId;
+        this.name = name;
+        this.price = price;
+        this.stockQty = stockQty;
          
-     }
-     
-   
+      }
+      void updatePrice(Admin product){
+          System.out.println("Enter id: ");
+          int x = sc.nextInt();
+          for(Product prods : product.products){
+            if(prods.productId == x){
+               System.out.println("Enter new price: ");
+               int newPrice = sc.nextInt();
+               prods.price = newPrice;
+            }
+          }
+      }
+      void updateStock(Admin product){
+          System.out.println("Enter id: ");
+          int x = sc.nextInt();
+          for(Product prods : product.products){
+              System.out.println("Enter amount: ");
+              int newQty = sc.nextInt();
+                prods.stockQty = newQty;        
+          }
+      }     
 }
 
 class Order{
-   int orderId;
-   int customerId; 
-   int totalAmount;
-   int orderDate;
-   int prodID;
-   String name;
-   int price;
-   
-   ArrayList<Product> order = new ArrayList<>();
-   List<Order> orderHistory = new ArrayList<>();
-   Scanner sc = new Scanner(System.in);
-   
-   Order(){}
-   Order(int orderId,int customerId,int prodId, String name,int price){
-       this.orderId = orderId;
-       this.customerId =customerId;     
-       this.prodID = prodId;
-       this.name = name;
-       this.price = price;
-   }
-  
-    int  calculateTotalAmount(){
-       int total =0;
-       for(Product prods : order){
-         total+=prods.price;
-       }      
-      return total;
-   }
-
-   void addProductToOrder(Admin admin){
-       List<Product> prods = admin.products;
-           
-       System.out.print("Enter id to add: ");
-       int id = sc.nextInt();
-
-       for(Product product : prods){
-           if(product.productId == id){             
-              order.add(product);      
-           }
-       }
-   }
-   
-    int idOrder = 22911 + orderId;
-   void confirmOrder(Order admin){      
-       List<Product> pr = admin.order;   
-      for(Product prod: pr){
-           Order order = new Order(orderId,customerId,prod.productId,prod.name,prod.price);    
-           orderHistory.add(order);       
-      } 
-      idOrder++;      
-      order.removeAll(pr);
-      
-      System.out.println("\nYour order has been successfully placed\n");
-   }
-   
-   int getIdOrder(){return idOrder;}
+     
+      int orderId;
+      int customerId;  
+      int orderDate;
+      int prodID;
+      String name;
+      int price;  
  
-   
-      void printOrder(){
-           System.out.println("\nOrders: ");
-           for(Product ordr : order){             
-               System.out.println("{" + "id: " + ordr.productId + "\t name: " + ordr.name + "\t price: " + ordr.price + "}" );        
-           }
-           System.out.println("Total: " + calculateTotalAmount() + "\n");
-   }  
+      List<Product> orderr = new ArrayList<>();     
+      HashMap<Integer,List<Product>> hash = new HashMap<>();   
+      Scanner sc = new Scanner(System.in);
+        
+        Order(){}
+        Order(int orderId,int customerId,int prodId, String name,int price){
+            this.orderId = orderId;
+            this.customerId =customerId;     
+            this.prodID = prodId;
+            this.name = name;
+            this.price = price;
+        }    
+       void addProductToOrder(Admin produ){
+            List<Product> pro = produ.products;
+            System.out.print("Enter id to add order: ");
+            int id = sc.nextInt();
+            for(Product prod: pro){
+                if(prod.productId == id){                
+                    orderr.add(prod);
+                    prod.stockQty--;
+                    break;
+                }
+            }
+        }          
+        int idOrder = 229101;
+        void confirmOrder(){      
+                 hash.put(idOrder,new ArrayList<>(orderr));
+                 idOrder++;      
+                 orderr.clear();
+                 System.out.println("\n<<<Your order has been successfully placed>>>\n");
+             }          
+        int calculateTotalAmount(){
+             int total =0;
+              for (Product ordr : orderr) {
+               total+=ordr.price;
+            }
+              return total;
+         }       
+       void printOrder() {
+                if (orderr.isEmpty()) {
+                    System.out.println("No orders placed.");
+                    return;
+                }
+                System.out.println("\nOrders: ");            
+                for (Product ordr : orderr) {
+                    System.out.println("{" + "id: " + ordr.productId + "\t name: " + ordr.name + "\t price: " + ordr.price + "}");            
+                }
+                System.out.println("Total: " + calculateTotalAmount() + "\n");
+               }
 }
-
-public class Inhiretance {
-
-    public static void main(String[] args) {
+public class RetailStore {
+       public static void main(String[] args) {
+        
         Scanner sc = new Scanner(System.in);
-       
-     //   Customer  p =  new Customer();
-       // Admin a = new Admin("",);
-       Order order = new Order();
-       boolean exec = true;
-       
-      do  {
-        System.out.print("Login as: \n 1)Customer \n 2)Admin (1?2): ");
-        int as = sc.nextInt();
+        Admin admin = new Admin(1, "AdminUser", "", 12345, "Computer Science");
+        admin.madeProduct();
+        Order order = new Order();
+           
+        boolean exec = true;     
         
-        if(as == 1){
-             
-                System.out.print("Enter Username: ");
-                String userName = sc.nextLine();
-                
-                userName =sc.nextLine(); 
-                
-                System.out.print("Enter User Email: ");
-                String userEmail = sc.nextLine(); 
-                
-                System.out.print("Enter UserId: ");
-                int userId = sc.nextInt();
-                Customer p = new Customer(userName,userEmail,userId,"");
-                 Admin admin = new Admin(userName,userEmail,userId,0,"");
-                 p.LogIn();
-                 
-             boolean con = true;  
-             
-           do{     
-                System.out.println("[Main Menu] \n 1, Placeorder \n 2 ViewOrderHistory \n 3 Exit ");
-                int choice = sc.nextInt();
-                sc.nextLine();
-                  
-                switch(choice){
-                    case 1:
-                          System.out.println("Select Products: ");                                                                    
-                               boolean run = false;
-                               do{  
-                                   p.placeOrder(admin);
-                                   order.addProductToOrder(admin);
-                                   System.out.print("Add more? (y/n)");
-                                   String ans = sc.nextLine();
-                                   
-                                   if(ans.equals("y")){
-                                      run= true;
-                                   }else if(ans.equals("n")){
-                                          
-                                       order.printOrder();
-                                       System.out.print("Do you want to confirm your orders?(y/n)");
-                                       String ans2 = sc.nextLine();
-                                        
-                                       if(ans2.equals("y")){
-                                           order.confirmOrder(order);
-              
-                                           run = false;
-                                       }  else if (ans2.equals("n")) {
-                                                run = false;
-                                            } 
-                                   } else {
-                                       run = false;
-                                        }
-                                   
-                                 }while(run); 
-                                   break;
-                        case 2:
-                                p.viewOrderHistory(order); 
-                               break;
-                        case 3 :
-                            con = false;
-                           break;
-                       }   
-                
-           }while(con); 
-        }else if(as == 2){
-          
-                System.out.print("Enter Username: ");
-                String userName = sc.nextLine();
-                userName= sc.nextLine(); 
-                System.out.print("Enter User Email: ");
-                String userEmail = sc.nextLine();
-                System.out.print("Enter UserId: ");
-                int userId = sc.nextInt();
-                Admin p2 = new Admin(userName,userEmail,userId,0,"");
+        do{
+               System.out.println("Login as: \n  1)Customer \n  2)Admin (1?2) \n  3,Exit: ");
+               int as = sc.nextInt();
                
-                p2.LogIn();
-                Product prod = new Product();
-                boolean runAdmin= true;
-                do{
-                      System.out.println("\n1, Add Product \n2, Remove Product \n3,Manage Inventory\n 4, Exit");
-                      int adminChoice= sc.nextInt();
-                      
-                      switch(adminChoice){
-                          case 1:                         
-                              p2.addProduct(prod);                             
-                              p2.displayProds();
-                              break;
-                          case 2:                              
-                              p2.displayProds();
-                              System.out.println("Enter id to remove:");
-                              int remove = sc.nextInt();
-                              p2.RemoveProduct(remove);
-                              p2.displayProds();
-                              break;
-                          case 4:
-                              runAdmin = false;
-                              break;
-                      }
-                      
-                 }while(runAdmin);
-        }
-        
-     }while(exec);  
-          
-        
-        
-      
-
-
-                               
-
-
-       
-
-       
-        
-        
-          
-        
-         
-         
-        
-//        order.confirmOrder(p1);  
-//        
-//        
-//        p.placeOrder(p1);    
-//        order.addProductToOrder(p1);
-//        
-//        order.confirmOrder(p1);  
-//        
-//        
-//        System.out.println(order.calculateTotalAmount());
-//        p1.ManageInventory();
-//        p1.displayProds();
-//       
-        
-    }
+            switch (as) {
+                case 1:
+                    {
+                        System.out.print("\nEnter Username: ");
+                        String userName = sc.nextLine();
+                        userName =sc.nextLine();
+                        System.out.print("Enter User Email: ");
+                        String userEmail = sc.nextLine();
+                        System.out.print("Enter UserId: ");
+                        int userId = sc.nextInt();
+                        Customer p = new Customer(userId,userName,userEmail,0,"CS");
+                        p.LogIn();
+                        boolean con = true;
+                        do{
+                            System.out.println("[[[Main Menu]]] \n 1,Placeorder \n 2,ViewOrderHistory \n 3,Exit ");
+                            int choice = sc.nextInt();
+                            sc.nextLine();
+                            
+                            switch(choice){
+                                case 1:
+                                    System.out.println("\n|| Select Products: ||");
+                                    boolean run = true;
+                                    do{
+                                        p.placeOrder(admin);
+                                        order.addProductToOrder(admin);
+                                        System.out.print("Add more? (y/n)");
+                                        String ans = sc.nextLine();
+                                        if(ans.equals("n")){
+                                            order.printOrder();
+                                            System.out.println("Do you want to confirm your order? (y/n):");
+                                            String confirm =  sc.nextLine();
+                                            if(confirm.equals("y")){
+                                                order.confirmOrder();
+                                            }
+                                            run = false;
+                                        }
+                                    }while(run);
+                                    break;
+                                case 2:
+                                    p.viewOrderHistory(order);
+                                    break;
+                                case 3 :
+                                    p.LogOut();
+                                    con = false;
+                            }
+                        }while(con);
+                        break;
+                    }
+                case 2:
+                    {
+                        System.out.print("\nEnter Username: ");
+                        String userName = sc.nextLine();
+                        userName= sc.nextLine();
+                        System.out.print("Enter User Email: ");
+                        String userEmail = sc.nextLine();
+                        System.out.print("Enter UserId: ");
+                        int userId = sc.nextInt();
+                        Admin p2 = new Admin(userId,userName,userEmail,0,"CS");
+                        p2.LogIn();
+                        boolean runAdmin = true;
+                        do{
+                            System.out.println("[[[Main Menu]] \n 1,Add Product \n 2,Remove Product \n 3,Manage Inventory\n 4,Exit");
+                            int adminChoice= sc.nextInt();
+                            
+                            switch(adminChoice){
+                                
+                                case 1:
+                                    admin.addProduct();
+                                    System.out.println("\n <<<New Item Added>>\n");
+                                    break;
+                                case 2 :
+                                    admin.printProduct();
+                                    admin.removeProduct();
+                                     System.out.println("\n <<<Item revomed Succesfully>>\n");
+                                    break;
+                                case 3:
+                                    admin.manageInventory(admin);
+                                    break;
+                                case  4:
+                                    admin.LogOut();
+                                    runAdmin = false;
+                                    break;
+                            }
+                        }while(runAdmin);
+                        break;
+                    }
+                default:   
+                    System.out.println("\n\tThank you for using!\n");
+                    exec = false;
+                    break;
+            }
+          }while(exec);
+       }
 }
