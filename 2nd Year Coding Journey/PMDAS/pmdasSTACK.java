@@ -13,9 +13,14 @@ class PMDAS{
             if (ch == ' ') {
                 continue; // Skip spaces
             } else if (Character.isDigit(ch)) {
-                int num = ch - '0';
+                int num = ch - '0'; //  this ch will convert to int     
+                 // check if the next ch is still a number to determine if the numbr is tens,hundreds or thousands ...
                 while (i + 1 < expression.length() && Character.isDigit(expression.charAt(i + 1))) {
-                    num = num * 10 + (expression.charAt(i + 1) - '0');
+                     // let say the number is 71 and value of num is 7 and next is 1
+                     // The "num * 10" = 7*10 and the "(expression.charAt(i+1) - '0')" = 1;
+                     // 7*10 + 1 = 71
+                     num = num * 10 + (expression.charAt(i + 1) - '0');
+                     
                     i++;
                 }
                 values.push(num);
