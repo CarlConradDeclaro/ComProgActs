@@ -1,0 +1,114 @@
+
+package payroll;
+import java.util.Scanner;
+
+ 
+
+class PayRoll{
+     
+      public static void main(String[] args){
+       
+          double hrwkd,rate, otHrs,grossPay,tax,netPay;
+          String display;
+      do{ 
+            hrwkd = gethrswkd();
+            rate = getRate();    
+            otHrs = getOtHrs();
+            double x =computeOTPay(otHrs,rate);
+            grossPay = computeGrossPay(hrwkd,rate,x);
+            tax = computeTax(grossPay);
+            netPay = computeNetPay(grossPay,tax);
+           
+       displayResults(grossPay,tax,x,netPay);
+       
+       Scanner sc = new Scanner(System.in);
+       System.out.println("Try again? (y/n)");
+       display = sc.nextLine().toLowerCase();
+       
+      }while(display.equals("y"));
+       
+      System.out.println("Program ends)");
+       
+       
+      }
+  
+      
+       public static double gethrswkd(){
+           double hrswkd;
+           Scanner sc =  new Scanner(System.in);
+           System.out.println("Enter of Hours of worked: ");
+           hrswkd = sc.nextDouble();
+           return hrswkd;     
+       }
+      
+       public static double getRate(){
+       double rate;
+       Scanner sc = new Scanner(System.in);
+       System.out.println("Enter rate: ");
+       rate =  sc.nextDouble();
+       return rate;
+       }
+       
+       
+      public static double getOtHrs(){    
+          Scanner sc = new Scanner(System.in);
+          System.out.println("Enter hours worked overtime: ");          
+          double otPay = sc.nextDouble();           
+           return otPay;   
+       }
+
+       
+       public static double computeOTPay(double getOtHrs, double rate){    
+           double otPay = getOtHrs * (rate + 0.25);       
+           return otPay;   
+       }
+       
+       
+       public static double computeGrossPay(double hrswkd, double rate, double otPay){
+           double grossPay = hrswkd * rate  +  otPay;
+           return grossPay;
+       }
+      
+       
+       public static double computeTax(double grossPay){
+       
+       double taxRate ;
+       double excess ;
+       
+       //incomeTax
+       if(grossPay > 250000 && grossPay <= 400000){
+            excess = grossPay-250000;
+            taxRate = 0.15 * excess;
+       }else if(grossPay > 400000 && grossPay <= 800000){
+            excess = grossPay - 400000;
+            taxRate = 22500 + 0.2 * excess;
+       }else if(grossPay > 800000  && grossPay <= 2000000){
+           excess = grossPay -800000;
+           taxRate = 102500 + 0.25 * excess;
+       }else if(grossPay >2000000 && grossPay <= 8000000 ){
+           excess = grossPay - 2000000;
+           taxRate = 402500  + 0.3 * excess;
+       }else if(grossPay > 8000000){
+           excess = grossPay -  8000000;
+           taxRate = 2202500 + 0.35 * excess;
+       
+       }else {
+         taxRate = 0;
+       }
+       
+       return taxRate;
+ 
+       }   
+  public static double  computeNetPay(double grossPay, double computeTax){
+      double netP = grossPay - computeTax;
+      return netP;
+  }
+
+  public static void displayResults(double computeGrossPay, double computeTax, double computeOTPay, double computeNetPay ){
+      System.out.println("Gross Pay: " + computeGrossPay);
+      System.out.println("Over time Pay " + computeOTPay);
+      System.out.println("Income Tax: "+computeTax);
+      System.out.println("NetPay: " + computeNetPay);
+
+     }
+}
