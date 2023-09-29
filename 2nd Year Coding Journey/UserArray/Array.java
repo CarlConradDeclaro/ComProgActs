@@ -157,8 +157,8 @@ class MyArray implements Arrays{
     public int getSize() {
         return size;
     }
-    public void setSize(int size) {
-        this.size = size;
+    public int setSize(int size) {
+        return size;
     }
     public int getCount() {
         return count;
@@ -177,12 +177,14 @@ public class Array {
                 
         System.out.print("\n            Welcome. \nEnter desired size for your array \nSize: ");
         int size = sc.nextInt();
-        MyArray myArray = new MyArray(size);
-        myArray.setSize(size);
-        System.out.println("\nMyArray myArray = new MyArray(" +myArray.getSize()+");");
+        MyArray myArray;
+        myArray = new MyArray(size);
+      //  myArray.setSize(size);
+       // System.out.println("\nMyArray myArray = new MyArray(" +myArray.getSize()+");");
         
         boolean run = true;
         do{
+              
             System.out.print("\nOperations: \n 1,Add\n 2,Ascending Sort\n 3,Descending Sort\n 4,Edit\n 5,Remove\n 6,ViewArray\n 7,Exit \nEnter: ");
             int operation  = sc.nextInt();
             switch(operation){
@@ -232,7 +234,12 @@ public class Array {
                             System.out.println("\n<<<Array is is Empty!>>>");                   
                         else
                         myArray.viewArray();                     
-                        break;            
+                        break;    
+                case 7 :
+                      System.out.println("Enter new size: ");
+                      int newSize = sc.nextInt();
+                      
+                      break;              
                 default:
                     run =false;
                     break;
