@@ -1,4 +1,4 @@
- import java.util.Scanner;
+  import java.util.Scanner;
 
 interface Arrays{
         void add(int data); //add element to the array
@@ -27,42 +27,32 @@ class MyArray implements Arrays{
     }
 
     @Override
-        public void viewArray(  ) {
+        public void viewArray(){
      
-            String bars = ""; 
-            for(int k=0; k<getCount();k++){
-                bars+="+-+-";
-            } 
+            String bars = ""; // just for design
+            for(int k=0; k<size;k++){
+                bars+="+-+";
+            }           
             System.out.println("\n\n"+bars);
-            for(int i=0; i<getCount();i++){
-                System.out.print(" "+arr[i]+" ");
+
+             //print the array
+            for(int i: arr){
+                System.out.print(" "+i+" ");
             }
+
             System.out.println();
             System.out.println(bars);
             
         }
 
     @Override
-    public void remove(int index) {
-         
-          if(index > getCount()-1){
+    public void remove(int index) {       
+          if(index >size){
                  System.out.println("<<<"+index + " is OutOfBounds>>>");
                  return;
-             }
-             
-         setCount(getCount()-1);// decrease the Count of the array because we're going to remove 1 element
-         int n =getCount();//
-         int last = arr[getCount()];  // get the lst element 
-         int j=0;
-        
-          for(int i=0;i<n;i++){
-              if(i != index){
-                arr[j] =arr[i];              
-                j++;             
-              }               
-          }
-          // put the last element here after iterationg the updated elements of the array
-           arr[j] = last;       
+           }
+                       
+             arr[index] = 0;       
           System.out.println("\n+++Removed Successfuly+++");
     }
 
@@ -100,7 +90,7 @@ class MyArray implements Arrays{
     public void ascendingSort() {
            //Selection Sort     
 	     for(int i=0;i<getCount();i++){
-	         int min=i; // 7
+	         int min=i; 
 	         for(int j=i+1;j<getCount();j++){
 	             if(arr[j]<arr[min])
 	               min = j;
@@ -116,7 +106,7 @@ class MyArray implements Arrays{
     public void descendingSort( ) {
                
         for(int i=0;i<getCount();i++){
-	         int min=i; // 7
+	         int min=i; 
 	         for(int j=i+1;j<getCount();j++){
 	             if(arr[j]>arr[min])
 	               min = j;
@@ -134,7 +124,7 @@ class MyArray implements Arrays{
                  System.out.println("<<<"+index + " is OutOfBounds>>>");
                  return;
              }
-             System.out.println("\nElement "+ arr[index] + " has been change to " +data);
+             System.out.println("\nIndex "+ index + " has been change to " +data);
              arr[index] = data; 
     }  
 
@@ -149,21 +139,14 @@ class MyArray implements Arrays{
         return getCount() > getSize()-1 ? true : false;
     }
   
-    public void setArr(int[] arr) {
-        this.arr = arr;
-    }
     public int getSize() {
         return size;
     }
-    public void setSize(int size) {
-        this.size = size;
-    }
+
     public int getCount() {
         return count;
     }
-    public void setCount(int count) {
-        this.count = count;
-    }
+   
 }
 
 
@@ -176,9 +159,7 @@ public class Array {
         System.out.print("\n            Welcome. \nEnter desired size for your array \nSize: ");
         int size = sc.nextInt();
         MyArray myArray = new MyArray(size);
-        myArray.setSize(size);
-       // System.out.println("\nMyArray myArray = new MyArray(" +myArray.getSize()+");");
-        
+       
         boolean run = true;
         do{
             System.out.print("\nOperations: \n 1,Add\n 2,Ascending Sort\n 3,Descending Sort\n 4,Search\n 5,Edit\n 6,Remove\n 7,ViewArray\n 8,Exit \nEnter: ");
