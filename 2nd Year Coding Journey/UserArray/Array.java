@@ -27,48 +27,38 @@ class MyArray implements Arrays{
     }
 
     @Override
-        public void viewArray(  ) {
+        public void viewArray(){
      
-            String bars = ""; 
-            for(int k=0; k<getCount();k++){
-                bars+="+-+-";
-            } 
-            //print array
+            String bars = ""; // just for design
+            for(int k=0; k<size;k++){
+                bars+="+-+";
+            }           
             System.out.println("\n\n"+bars);
-            for(int i=0; i<getCount();i++){
-                System.out.print(" "+arr[i]+" ");
+
+             //print the array
+            for(int i: arr){
+                System.out.print(" "+i+" ");
             }
+
             System.out.println();
-            System.out.println(bars);         
+            System.out.println(bars);
+            
         }
 
     @Override
-    public void remove(int index) {
-         
-          if(index > getCount()-1){
+    public void remove(int index) {       
+          if(index >size){
                  System.out.println("<<<"+index + " is OutOfBounds>>>");
                  return;
-             }
-             
-         setCount(getCount()-1);// decrease the Count of the array because we're going to remove 1 element
-         int n =getCount();//
-         int last = arr[getCount()];  // get the lst element 
-         int j=0;
-        
-          for(int i=0;i<n;i++){
-              if(i != index){
-                arr[j] =arr[i];              
-                j++;             
-              }               
-          }
-          // put the last element here after iterationg the updated elements of the array
-           arr[j] = last;       
+           }
+                       
+             arr[index] = 0;       
           System.out.println("\n+++Removed Successfuly+++");
     }
 
     @Override
     public void search(int data) {
-  
+    // Ternary search
        int low =0;
        int high = arr.length-1;
                       
@@ -77,11 +67,11 @@ class MyArray implements Arrays{
                 int mid2 = high- (high-low)/3;
 
                     if(data == arr[mid1]){
-                        System.out.println("\n+++ Element: " + data + " is present at index: " + mid1+ "+++");
+                        System.out.println("\n+++ Element: " + data + " is present at index: " + mid1+ " +++");
                         return;
                     }
                     if(data == arr[mid2]){
-                        System.out.println("\n+++ Element: " + data + " is present at index: " + mid2+ "+++");
+                        System.out.println("\n+++ Element: " + data + " is present at index: " + mid2+ " +++");
                         return;
                     }
                     if(data < arr[mid1]){
@@ -98,9 +88,9 @@ class MyArray implements Arrays{
 
     @Override
     public void ascendingSort() {
-                
+           //Selection Sort     
 	     for(int i=0;i<getCount();i++){
-	         int min=i; // 7
+	         int min=i; 
 	         for(int j=i+1;j<getCount();j++){
 	             if(arr[j]<arr[min])
 	               min = j;
@@ -116,7 +106,7 @@ class MyArray implements Arrays{
     public void descendingSort( ) {
                
         for(int i=0;i<getCount();i++){
-	         int min=i; // 7
+	         int min=i; 
 	         for(int j=i+1;j<getCount();j++){
 	             if(arr[j]>arr[min])
 	               min = j;
@@ -134,7 +124,7 @@ class MyArray implements Arrays{
                  System.out.println("<<<"+index + " is OutOfBounds>>>");
                  return;
              }
-             System.out.println("\nElement "+ arr[index] + " has been change to " +data);
+             System.out.println("\nIndex "+ index + " has been change to " +data);
              arr[index] = data; 
     }  
 
@@ -145,26 +135,18 @@ class MyArray implements Arrays{
     boolean isEmpty(){
         return getCount() == 0 ? true : false;
     }
-    boolean isFull( ){
-       
+    boolean isFull(){
         return getCount() > getSize()-1 ? true : false;
     }
   
-    public void setArr(int[] arr) {
-        this.arr = arr;
-    }
     public int getSize() {
         return size;
     }
-    public int setSize(int size) {
-        return size;
-    }
+
     public int getCount() {
         return count;
     }
-    public void setCount(int count) {
-        this.count = count;
-    }
+   
 }
 
 
@@ -176,69 +158,80 @@ public class Array {
                 
         System.out.print("\n            Welcome. \nEnter desired size for your array \nSize: ");
         int size = sc.nextInt();
-        MyArray myArray;
-        myArray = new MyArray(size);
-      //  myArray.setSize(size);
-       // System.out.println("\nMyArray myArray = new MyArray(" +myArray.getSize()+");");
-        
+        MyArray myArray = new MyArray(size);
+       
         boolean run = true;
         do{
-              
-            System.out.print("\nOperations: \n 1,Add\n 2,Ascending Sort\n 3,Descending Sort\n 4,Edit\n 5,Remove\n 6,ViewArray\n 7,Exit \nEnter: ");
+            System.out.print("\nOperations: \n 1,Add\n 2,Ascending Sort\n 3,Descending Sort\n 4,Search\n 5,Edit\n 6,Remove\n 7,ViewArray\n 8,Exit \nEnter: ");
             int operation  = sc.nextInt();
             switch(operation){
                 case 1 :
-                        if(myArray.isFull())
-                            System.out.println("\n<<<Array is Full!>>>");                   
-                        else{
-                            System.out.print("Enter Element: ");
-                            myArray.add(sc.nextInt());
-                        }
+                    if(myArray.isFull()){
+                        System.out.println("\n<<<Array is Full!>>>");
                         break;
+                    }else{
+                      System.out.print("Enter Element: ");
+                      myArray.add(sc.nextInt());
+                    }
+                    break;
                 case 2: 
-                        if(myArray.isEmpty())
-                            System.out.println("\n<<<Array is is Empty!>>>");                    
-                        else
-                        myArray.ascendingSort();             
+                    if(myArray.isEmpty()){
+                        System.out.println("\n<<<Array is is Empty!>>>");
                         break;
+                    }else{
+                    myArray.ascendingSort();
+                    }
+                    break;
                 case 3:
-                        if(myArray.isEmpty())
-                            System.out.println("\n<<<Array is is Empty!>>>");                     
-                        else
-                        myArray.descendingSort();                
+                     if(myArray.isEmpty()){
+                        System.out.println("\n<<<Array is is Empty!>>>");
                         break;
-                case 4: 
-                        if(myArray.isEmpty())
-                            System.out.println("\n<<<Array is is Empty!>>>");
-                        else{
-                            myArray.viewArray();
-                            System.out.print("Enter index: ");
-                            int index = sc.nextInt();
-                            System.out.print("Enter new element: ");
-                            int data = sc.nextInt();
-                            myArray.edit(index,data);
-                        }
+                    }else{
+                    myArray.descendingSort();
+                    }
+                    break;
+                 case 4: 
+                      if(myArray.isEmpty()){
+                           System.out.println("\n<<<Array is is Empty!>>>");
+                           break;
+                       }else{
+                          System.out.print("Enter element: ");
+                          int element = sc.nextInt();
+                          myArray.search(element);
+                       }                
+                       break;  
+                case 5: 
+                     if(myArray.isEmpty()){
+                        System.out.println("\n<<<Array is is Empty!>>>");
                         break;
-                case 5:
-                        if(myArray.isEmpty())
-                            System.out.println("\n<<<Array is is Empty!>>>");   
-                        else{
-                            myArray.viewArray();
-                            System.out.print("Enter index to remove: ");
-                            myArray.remove(sc.nextInt());
-                          }
+                    }else{
+                        myArray.viewArray();
+                        System.out.print("Enter index: ");
+                        int index = sc.nextInt();
+                        System.out.print("Enter new element: ");
+                        int data = sc.nextInt();
+                        myArray.edit(index,data);
+                    }
+                    break;
+                case 6:
+                      if(myArray.isEmpty()){
+                        System.out.println("\n<<<Array is is Empty!>>>");
                         break;
-                case 6: 
-                        if(myArray.isEmpty())
-                            System.out.println("\n<<<Array is is Empty!>>>");                   
-                        else
-                        myArray.viewArray();                     
-                        break;    
-                case 7 :
-                      System.out.println("Enter new size: ");
-                      int newSize = sc.nextInt();
-                      
-                      break;              
+                    }else{
+                    myArray.viewArray();
+                    System.out.print("Enter index to remove: ");
+                    myArray.remove(sc.nextInt());
+                    }
+                    break;
+                case 7: 
+                     if(myArray.isEmpty()){
+                        System.out.println("\n<<<Array is is Empty!>>>");
+                        break;
+                    }else{
+                    myArray.viewArray();
+                    }
+                    break;
+               
                 default:
                     run =false;
                     break;
@@ -246,5 +239,3 @@ public class Array {
         }while(run);                
     }
 }
-
-
