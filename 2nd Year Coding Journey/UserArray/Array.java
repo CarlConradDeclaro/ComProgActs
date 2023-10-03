@@ -125,11 +125,8 @@ class MyArray implements Arrays{
                  System.out.println("<<<"+index + " is OutOfBounds>>>");
                  return;
              }
-<<<<<<< HEAD
              System.out.println("\nElement "+ index + " has been change to " +data);
-=======
              System.out.println("\nIndex "+ index + " has been change to " +data);
->>>>>>> 75f4ab0a6f89c21dba658d47af776c7230c45d43
              arr[index] = data; 
     }  
 
@@ -247,4 +244,4 @@ public class Array {
 }
 =======
 }
->>>>>>> 75f4ab0a6f89c21dba658d47af776c7230c45d43
+ 
