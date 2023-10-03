@@ -240,8 +240,7 @@ public class Array {
             }                           
         }while(run);                
     }
-<<<<<<< HEAD
 }
-=======
-}
+
+
  
