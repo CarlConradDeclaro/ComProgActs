@@ -1,5 +1,6 @@
- import java.util.Scanner;
+  import java.util.Scanner;
 
+  
 interface Arrays{
         void add(int data); //add element to the array
         void viewArray();//view an element if present in the array
@@ -124,7 +125,11 @@ class MyArray implements Arrays{
                  System.out.println("<<<"+index + " is OutOfBounds>>>");
                  return;
              }
+<<<<<<< HEAD
              System.out.println("\nElement "+ index + " has been change to " +data);
+=======
+             System.out.println("\nIndex "+ index + " has been change to " +data);
+>>>>>>> 75f4ab0a6f89c21dba658d47af776c7230c45d43
              arr[index] = data; 
     }  
 
@@ -238,4 +243,8 @@ public class Array {
             }                           
         }while(run);                
     }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> 75f4ab0a6f89c21dba658d47af776c7230c45d43
