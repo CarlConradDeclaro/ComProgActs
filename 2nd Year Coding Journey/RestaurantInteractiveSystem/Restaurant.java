@@ -25,16 +25,32 @@ class Store{
 
 
 
- void print(){
+ void print(int x){
     
         
         System.out.println("Menu");
+        int i=0;
         for(Product prodt : products){
-          System.out.println(prodt.id +" "+ prodt.productId +" "+ prodt.prodPrice);         
+        
+          if(i <x){
+               System.out.println(prodt.id +" "+ prodt.productId +" "+ prodt.prodPrice); 
+          }
+          i++;
         }
         
        }
-
+ 
+ void printAddOn(){
+        int i=0;
+        System.out.println("Adds On");
+        for(Product prodt : products){
+        
+          if(i >2){
+               System.out.println(prodt.id +" "+ prodt.productId +" "+ prodt.prodPrice); 
+          }
+          i++;
+        }
+ }
 
 
 }
@@ -67,21 +83,36 @@ class Order {
 
 }
 
-class Restaurant{
+class Main{
     public static void main(String[] args) {
         Scanner sc =  new Scanner(System.in);
        Store a = new Product();
        a.defaultProd();
-       a.print();
+      
        
        
           
           boolean run = true;
         do{
-        
-            System.out.println("Enter product: ");
-            int choice = sc.nextInt();
+             a.print(3);
+             System.out.println("Enter product: ");
+             int choice = sc.nextInt();
+             System.out.println("Enter Quantity: ");
+             int quanty = sc.nextInt();
+             
+             System.out.println("Do you want to add more? (y/n)");
+              sc.nextLine();
+             String ans = sc.nextLine().toLowerCase();
+             
+             if(ans.equals("y")){
+                  a.printAddOn();
+                  System.out.println("Enter product: ");
+                  int c = sc.nextInt();
+                  System.out.println("Enter Quantity: ");
+                  int q = sc.nextInt();
+             }
             
+           
             
          
        
