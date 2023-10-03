@@ -124,7 +124,7 @@ class MyArray implements Arrays{
                  System.out.println("<<<"+index + " is OutOfBounds>>>");
                  return;
              }
-             System.out.println("\nIndex "+ index + " has been change to " +data);
+             System.out.println("\nElement "+ index + " has been change to " +data);
              arr[index] = data; 
     }  
 
