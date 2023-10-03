@@ -1,6 +1,6 @@
   import java.util.Scanner;
 
-  
+  //whatup
 interface Arrays{
         void add(int data); //add element to the array
         void viewArray();//view an element if present in the array
