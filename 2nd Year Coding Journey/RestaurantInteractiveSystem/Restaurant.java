@@ -1,4 +1,4 @@
-import java.util.*;
+ import java.util.*;
 
 class Store{
      
@@ -8,7 +8,9 @@ class Store{
 
         for(Product producds : prods){
           System.out.println(producds.id +" "+ producds.productId +" "+ producds.prodPrice);
+          System.out.println("s");
         }
+        
     }
  
 
@@ -23,8 +25,8 @@ class Product extends Store{
    String productId;
    double prodPrice;
 
-   AbstractList<Product> products  = new ArrayList<>();
-
+   ArrayList<String> products  = new ArrayList<>();
+   Product(){}
    public Product(int id,String productId,double prodPrice ){
     this.id =id;
     this.productId = productId;
@@ -39,11 +41,11 @@ class Product extends Store{
     
     Product addOns1 = new Product(4,"R1 - PHP", 35.00);
     Product addOns2 = new Product(5,"R2 - PHP", 50.00);
-    products.add(prod1);
-    products.add(prod2);
-    products.add(prod3);
-    products.add(addOns1);
-    products.add(addOns2);
+    products.add(prod1.toString());
+    products.add(prod2.toString());
+    products.add(prod3.toString());
+    products.add(addOns1.toString());
+    products.add(addOns2.toString());
   
 }
 }
@@ -65,8 +67,12 @@ class Order extends Store{
 
 
 
-class Restaurant{
+class Main{
     public static void main(String[] args) {
-     
+       Store a =new Store();
+       a = new Product();
+       a.defaultProd();
+       
+       a.print();
     }
 }
