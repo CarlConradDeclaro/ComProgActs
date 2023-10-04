@@ -48,7 +48,6 @@ class Store {
     }
     
     private double totalPrice;
-    
     // Print orders, calculate total price
     void printOrders(){
         totalPrice = 0;
@@ -59,7 +58,7 @@ class Store {
             totalPrice += orderPrice;
         }
     }
- 
+    
      // Make an order based on user input
      void makeOrder(ArrayList<Product> prods, String ans, int qty){
          for(Product p : prods){
@@ -69,7 +68,6 @@ class Store {
              }
          }
     }
-       
     // Convert total price to dollars and return as a formatted string
     String getAmtToDollar(){
         double amount = totalPrice;
@@ -82,8 +80,7 @@ class Store {
         order.clear(); // Clear the orders after the order is made
     }
 }
-
-class Product extends Store {
+class Product {
      String id;
      double price;
      int qty;
@@ -93,7 +90,6 @@ class Product extends Store {
          this.qty = qty;
      }
 }
-
 class Order {
     String id;
     double price;
@@ -108,8 +104,7 @@ class Order {
          this.qty = qty;
     }
 }
-
-public class Main{
+public class Restaurant{
     public static void main(String[] args) {
       Scanner sc = new Scanner(System.in);
 
@@ -119,41 +114,53 @@ public class Main{
 
       boolean run = true;
       boolean continueOrder = true;
-
+      boolean addmore;
+      boolean moreAddOns;
       do {
           if (continueOrder) {
                 store.printProducts();
-                System.out.println("Enter id to add product: ");
-                String ans = sc.nextLine();
-                System.out.println("Enter quantity: ");
-                int qty = Integer.parseInt(sc.nextLine()); 
-        
-                store.makeOrder(store.products, ans, qty);
-        
-                System.out.println("\nDo you want some add ons? (y/n)");
-        
-                String choice = sc.nextLine().toLowerCase();
-                if (choice.equals("y")) {
-                    store.printAddOns();
-                    System.out.println("Enter id to add product: ");
-                    String addOns = sc.nextLine().toUpperCase();
-                    System.out.println("Enter quantity: ");
-                    int qunty = Integer.parseInt(sc.nextLine());
-                    store.makeOrder(store.products, addOns, qunty);
-                }
-                  store.printOrders();
-                  store.clearOrders();
-                  
-                  System.out.println("Total amount: "+store.getAmtToDollar());
-                  System.out.println("\nDo you want to order again? (y/n): ");
-                  String answer = sc.nextLine().toLowerCase();
-               
-                  if(answer.equals("n")) {
-                      continueOrder = false;
-                      run = false;
-                  } else {
-                      continueOrder = true;
-                  }
+                    do{
+                        System.out.print("Enter id to add product: ");
+                        String ans = sc.nextLine();
+                        System.out.print("Enter quantity: ");
+                        int qty = Integer.parseInt(sc.nextLine()); 
+                    
+                        store.makeOrder(store.products, ans, qty);
+                        System.out.print("Add more? (y/n): ");
+                        String more = sc.nextLine().toLowerCase();
+                        addmore = more.equals("y") ? true : false;
+                    }while(addmore);
+                        
+                        System.out.println("\nDo you want some add ons? (y/n)");
+                        String choice = sc.nextLine().toLowerCase();
+                         
+                    if (choice.equals("y")) {
+                             store.printAddOns();
+                                 do{
+                                    System.out.print("Enter id to add product: ");
+                                    String addOns = sc.nextLine().toUpperCase();
+                                    System.out.print("Enter quantity: ");
+                                    int qunty = Integer.parseInt(sc.nextLine());
+                                    store.makeOrder(store.products, addOns, qunty);
+                                               
+                                    System.out.print("Add more? (y/n): ");
+                                    String moreOns = sc.nextLine().toLowerCase();
+                                    moreAddOns = moreOns.equals("y") ? true : false;
+                                }while(moreAddOns);
+                    }
+                        store.printOrders();
+                        store.clearOrders();
+                              
+                        System.out.println("Total amount: "+store.getAmtToDollar());
+                        System.out.print("\nDo you want to order again? (y/n): ");
+                        String answer = sc.nextLine().toLowerCase();
+                           
+                            if(answer.equals("n")) {
+                                  continueOrder = false;
+                                  run = false;
+                            } else {
+                                  continueOrder = true;
+                            }
               }
         } while (run);
         System.out.println("Thank you!");
