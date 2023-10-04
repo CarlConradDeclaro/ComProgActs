@@ -1,5 +1,5 @@
-   import java.util.*;
-
+     import java.util.*;
+import java.text.DecimalFormat;
 
 
 
@@ -7,6 +7,7 @@
 class Store {
     
     ArrayList<Product> products = new ArrayList<>();
+    ArrayList<Order> order = new ArrayList<>();
     
     void defaultProduct(){
         Product prod1 = new Product("C1", 100.00,0);
@@ -41,13 +42,33 @@ class Store {
         }
     }
     
-    
-    void printOrders(ArrayList<Product> orders){
+    private  double totalPrice;
+    void printOrders(){
+        totalPrice =0;
         System.out.println("\nOrders: ");
-          for(Product order : orders){
-              System.out.println(order.id +" - Php " + order.price + " Qty: " + order.qty );
+          for(Order orders : order){
+              double orderPrice = orders.price * orders.qty;
+              System.out.println(orders.id +" - Php " + orders.price + " Qty: " + orders.qty );
+              totalPrice+=orderPrice;
              }
         }
+    
+    
+    double getAmtToDollar(){
+        double amount  = totalPrice;
+        // DecimalFormat decimalFormat = new DecimalFormat("$#,##0.00");
+        return   amount;
+         
+    }
+    
+     void makeOrder(ArrayList<Product> prods,String ans, int qty){
+         for(Product p : prods){
+             if(p.id.equals(ans.toUpperCase())){
+                  Order newOrder = new Order(p.id,p.price,qty);
+                  order.add(newOrder);
+             }
+         }
+    }
     
     
 }
@@ -65,21 +86,15 @@ class Product extends Store {
     
 }
 class Order{
-    
-    ArrayList<Product> order = new ArrayList<>();
-    
-    
-    void makeOrder(ArrayList<Product> prods,String ans, int qty){
-         for(Product p : prods){
-             if(p.id.equals(ans.toUpperCase())){
-                  p.qty = qty;     
-                  order.add(p);
-             }
-         }
+    String id;
+    double price;
+    int qty;
+    Order(){}
+    Order(String id,double price,int qty){
+         this.id = id;
+         this.price = price;
+         this.qty= qty;
     }
-    
-    
-
 }
 
 
@@ -101,11 +116,11 @@ do {
         System.out.println("Enter id to add product: ");
         String ans = sc.nextLine();
         System.out.println("Enter quantity: ");
-        int qty = Integer.parseInt(sc.nextLine()); // Read the integer and consume the newline
+        int qty = Integer.parseInt(sc.nextLine()); 
 
-        order.makeOrder(store.products, ans, qty);
+        store.makeOrder(store.products, ans, qty);
 
-        System.out.println("Do you want some add ons? (y/n)");
+        System.out.println("\nDo you want some add ons? (y/n)");
 
         String choice = sc.nextLine().toLowerCase();
         if (choice.equals("y")) {
@@ -113,13 +128,14 @@ do {
             System.out.println("Enter id to add product: ");
             String addOns = sc.nextLine().toUpperCase();
             System.out.println("Enter quantity: ");
-            int qunty = Integer.parseInt(sc.nextLine()); // Read the integer and consume the newline
+            int qunty = Integer.parseInt(sc.nextLine());
 
-            order.makeOrder(store.products, addOns, qunty);
+            store.makeOrder(store.products, addOns, qunty);
         }
            
-         store.printOrders(order.order);
-         System.out.println("Do you want to order again? (y/n): ");
+         store.printOrders();
+         System.out.println("Total amount: "+store.getAmtToDollar());
+         System.out.println("\nDo you want to order again? (y/n): ");
          String answer = sc.nextLine().toLowerCase();
        
         if (answer.equals("n")) {
