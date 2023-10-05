@@ -1,4 +1,4 @@
-  import java.util.*;
+   import java.util.*;
 import java.text.DecimalFormat;
 /*
 author: carlconradeclaro
@@ -72,7 +72,7 @@ class Store {
     String getAmtToDollar(){
         double amount = totalPrice;
         DecimalFormat decimalFormat = new DecimalFormat("$#,##0.00");
-        return decimalFormat.format(amount * 56.81); //  P56.81 is the current amount of dollar to php
+        return decimalFormat.format(amount / 56.81); //  P56.81 is the current amount of dollar to php
     }
     
     // Clear the order list
@@ -104,7 +104,7 @@ class Order {
          this.qty = qty;
     }
 }
-public class Restaurant{
+public class Main{
     public static void main(String[] args) {
       Scanner sc = new Scanner(System.in);
 
