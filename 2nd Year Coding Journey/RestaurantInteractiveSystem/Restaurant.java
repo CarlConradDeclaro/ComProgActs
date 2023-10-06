@@ -3,8 +3,7 @@ import java.text.DecimalFormat;
 /*
 author: carlconradeclaro
 */
-class Store {
-    
+class Store {   
     ArrayList<Product> products = new ArrayList<>();
     ArrayList<Order> order = new ArrayList<>();
     
