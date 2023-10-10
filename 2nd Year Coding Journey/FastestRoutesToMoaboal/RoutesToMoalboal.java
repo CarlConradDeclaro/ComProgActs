@@ -18,7 +18,7 @@ class RoutesDistance{
      void printRoutes(){
            
             obstructed.add("Dumanjug");
-             double Distance =0;
+             double TOA =0;
              
              System.out.println("Is Barili obstructed? (y/n) ");
              String obs = sc.nextLine();
@@ -37,7 +37,7 @@ class RoutesDistance{
                  routes.add(route13);
                  routes.add(route341);
                  routes.add(route41413);
-                 Distance =  computeTotalDistance(speedy,getDisTance());
+                 TOA =  computeTotalDistance(speedy,getDisTance());
                  
              }else if(!(obstructed.contains("Dumanjug"))){
                  Routes route13 = new Routes("SouthBustoCarcar",38.3);
@@ -53,9 +53,9 @@ class RoutesDistance{
              System.out.println("Speed: " + speedy);
              double dd = getDisTance();
              System.out.println("Total Distance: "+dd + "km");
-             int speed = (int)Distance/60;
-             int minutes = (int)Distance%60;
-             System.out.println("Time of arrival: " + speed  +"hr:"+minutes);
+             int hour = (int)TOA/60;
+             int minutes = (int)TOA%60;
+             System.out.println("Time of arrival: " + hour  +"hr:"+minutes);
     }
 }
 
@@ -73,12 +73,12 @@ class Routes
 public class Main{
   public static void main (String[]args){
  
-  RoutesDistance routeDistance = new RoutesDistance();
-
-  System.out.println("Cebu City (South Bus) ");
-  System.out.println("Route 1: Mingla");
-  System.out.println("");
-  
-  routeDistance.printRoutes();
+          RoutesDistance routeDistance = new RoutesDistance();
+        
+          System.out.println("Cebu City (South Bus) ");
+          System.out.println("Route 1: Mingla");
+          System.out.println("");
+          
+          routeDistance.printRoutes();
   }
 }
