@@ -1,4 +1,4 @@
-import java.util.*;
+   import java.util.*;
 class RoutesDistance{
         Scanner sc = new Scanner(System.in);
         List<Routes> routes = new ArrayList<>();    
@@ -32,7 +32,7 @@ class RoutesDistance{
              
             if(!(obstructed.contains("Barili"))){
                  Routes route13 = new Routes("SouthBustoCarcar",38.3);
-                 Routes route341 = new Routes("CarCarToSibunga",18.1);
+                 Routes route341 = new Routes("CarCarTobarili",18.1);
                  Routes route41413 = new Routes("BariliToMoaboal",30.3);
                  routes.add(route13);
                  routes.add(route341);
@@ -61,18 +61,19 @@ class RoutesDistance{
 
 class Routes{
     String Place;
-    double distance;
-    Routes(){}
-    Routes(String Place,double distance){
+         double distance;
+         Routes(){}
+         Routes(String Place,double distance){
              this.Place = Place ;
              this.distance =distance;
-     }    
+            }    
 }
 
-public class RoutesToMoalboal{
+public class Main{
   public static void main (String[]args){
  
           RoutesDistance routeDistance = new RoutesDistance();
+        
           System.out.println("Cebu City (South Bus) ");
           System.out.println("Route 1 Mingla");
           System.out.println("");
