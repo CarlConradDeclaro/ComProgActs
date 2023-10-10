@@ -103,7 +103,7 @@ class Order {
          this.qty = qty;
     }
 }
-public class Main{
+public class Restaurant{
     public static void main(String[] args) {
       Scanner sc = new Scanner(System.in);
 
