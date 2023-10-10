@@ -165,3 +165,137 @@ public class Restaurant{
         System.out.println("Thank you!");
     }
 }
+
+
+
+
+
+
+
+
+
+
+ 
+
+// import java.util.*;
+
+
+// class RoutesDistance{
+//        Scanner sc = new Scanner(System.in);
+//        List<Routes> routes = new ArrayList<>();    
+//        List<String> obstructed = new ArrayList<>();
+
+//     double computeTotalDistance (double speed, double kph){
+//             double kmHr = kph;
+//               return (kmHr / speed ) * 60;
+//      }
+     
+//     double getSpeed(int speed){
+//         return speed;
+//     }
+    
+//      void printRoutes(){
+           
+//             obstructed.add("Dumanjug");
+            
+//              double toMoalBoal =0;
+//              double TOA =0;
+             
+//              System.out.println("Is Barili obstructed? (y/n) ");
+//              String obs = sc.nextLine();
+             
+//              if(obs.equals("y")){
+//                  obstructed.add("Barili");
+//              }
+             
+//              System.out.println("Enter Speed ");
+//              double speedy = sc.nextDouble();
+             
+//             if(!(obstructed.contains("Barili"))){
+//                  Routes routes1to3 = new Routes("SouthBustoCarCar",57.5);
+//                  Routes routes41 = new Routes("carcarToBarili",18.1);
+//                  Routes routes411 = new Routes("bariliToDumanjug",23);
+//                  Routes routes412 = new Routes("dumanjugToAlcantara",28.5);
+//                  Routes routes413 = new Routes("AlcantaraToMoaboal",13.7);
+//                  routes.add(routes1to3);
+//                  routes.add(routes41);
+//                  routes.add(routes411);
+//                  routes.add(routes412);
+//                  routes.add(routes413);
+//                  toMoalBoal =0;
+                 
+//                 for(Routes r : routes){
+//                     toMoalBoal+=r.kph;
+//                 }
+                 
+//                   TOA =  computeTotalDistance(speedy,toMoalBoal) ;
+                 
+//              }else if(!(obstructed.contains("Dumanjug"))){
+//                  Routes routes1to3 = new Routes("SouthBustoCarCar",57.5);
+//                  Routes routes41 = new Routes("carcarToSibonga",13.2);
+//                  Routes routes411 = new Routes("SibongaToDumanjug",28.1);
+//                  Routes routes412 = new Routes("dumanjugToAlcantara",28.5);
+//                  Routes routes413 = new Routes("AlcantaraToMoaboal",13.7);
+//                  routes.add(routes1to3);
+//                  routes.add(routes41);
+//                  routes.add(routes411);
+//                  routes.add(routes412);
+//                  routes.add(routes413);
+//                  toMoalBoal =0;
+                 
+//                 for(Routes r : routes){
+//                     toMoalBoal+=r.kph;
+//                 }
+                  
+//                   TOA =  computeTotalDistance(speedy,toMoalBoal) ;
+                 
+//              }else {
+//                  Routes routes1to3 = new Routes("SouthBustoCarCar",57.5);
+//                  Routes routes41 = new Routes("carcarToSibonga",13.2);
+//                  Routes routes411 = new Routes("SibongaToArgao",26.5);
+//                  Routes routes412 = new Routes("ArgaoToRonda",21.4);
+//                  Routes routes413 = new Routes("rondaToAlcantara",20);
+//                   Routes routes414 = new Routes("AlcantaraToMoaboal",13.7);
+//                  routes.add(routes1to3);
+//                  routes.add(routes41);
+//                  routes.add(routes411);
+//                  routes.add(routes412);
+//                  routes.add(routes413);
+//                   routes.add(routes414);
+//                  toMoalBoal =0;
+                 
+//                 for(Routes r : routes){
+//                     toMoalBoal+=r.kph;
+//                 }
+//                  TOA =  computeTotalDistance(speedy,toMoalBoal) ;
+                 
+//              }
+//                System.out.println(TOA);
+//     }
+// }
+
+// class Routes
+// {
+//          String Place;
+//          double kph;
+//          Routes(){}
+//          Routes(String Place,double kph){
+//              this.Place = Place ;
+//              this.kph =kph;
+//            }    
+// }
+
+
+// public class Main
+// {
+//   public static void main (String[]args){
+ 
+//   RoutesDistance routeDistance = new RoutesDistance();
+//   System.out.println("Cebu City (South Bus) ");
+//   System.out.println("Route 1: Mingla");
+//   System.out.println("");
+  
+//   routeDistance.printRoutes();
+//   }
+// }
+
