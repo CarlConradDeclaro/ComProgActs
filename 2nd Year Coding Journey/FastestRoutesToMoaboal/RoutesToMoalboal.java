@@ -1,16 +1,10 @@
-package FastestRoutesToMoaboal;
-
-
-
-import java.util.*;
-
-
+ import java.util.*;
 class RoutesDistance{
         Scanner sc = new Scanner(System.in);
         List<Routes> routes = new ArrayList<>();    
         List<String> obstructed = new ArrayList<>();
 
-    double computeTotalDistance (double speed, double dis){
+    double computeTotalDistance(double speed, double dis){
             double d = dis;
               return (d/ speed  ) * 60;
      }
@@ -46,18 +40,20 @@ class RoutesDistance{
                  Distance =  computeTotalDistance(speedy,getDisTance());
                  
              }else if(!(obstructed.contains("Dumanjug"))){
-                 
-                  
-              //    TOA =  computeTotalDistance(speedy,Routes distance) ;
+                 Routes route13 = new Routes("SouthBustoCarcar",38.3);
+                 Routes route341 = new Routes("CarCarToSibunga",18.1);
+                 Routes route41413 = new Routes("BariliToMoaboal",30.3);
+                 routes.add(route13);
+                 routes.add(route341);
+                 routes.add(route41413);
                  
              }else {
-                
-                // TOA =  computeTotalDistance(speedy,toMoalBoal) ;
-                 
+             
              }
              System.out.println("Speed: " + speedy);
-             System.out.println("Total Distance: "+Distance + "km/h");
-             int speed = (int)speedy/60;
+             double dd = getDisTance();
+             System.out.println("Total Distance: "+dd + "km");
+             int speed = (int)Distance/60;
              int minutes = (int)Distance%60;
              System.out.println("Time of arrival: " + speed  +"hr:"+minutes);
     }
@@ -74,8 +70,7 @@ class Routes
             }    
 }
 
-
-public class RoutesToMoalboal{
+public class Main{
   public static void main (String[]args){
  
   RoutesDistance routeDistance = new RoutesDistance();
