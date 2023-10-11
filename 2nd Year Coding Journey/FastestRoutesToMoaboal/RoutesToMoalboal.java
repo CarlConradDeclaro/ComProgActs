@@ -45,29 +45,7 @@ class FindShorstestRoutes{
              }         
     }  
     
-
-    double computeTotalDistance(double speed, double dis){
-        return (dis/ speed  ) * 60;
-    }    
-
-    double getSpeedy(){
-        return speedy;
-    }  
-
-    int getHours(){
-        return (int)(computeTotalDistance(getSpeedy(),getDisTance()))/60; 
-    }  
-
-    int getMinutes(){
-        return (int)(computeTotalDistance(getSpeedy(),getDisTance()))%60;
-    }
-
-    double getDisTance(){
-        double dis=0;
-        for(Routes d : routes)
-             dis+=d.distance;
-        return dis;
-    }
+ 
 
     void getObstrutedRoutes(){                 
              System.out.println("Is Barili obstructed? (y/n) ");
@@ -112,13 +90,4 @@ class Routes{
             }    
 }
 
-public class RoutesToMoalboal{
-  public static void main (String[]args){
-          FindShorstestRoutes fRoutes= new FindShorstestRoutes();
-          fRoutes.findBestRoutes();
-          fRoutes.displayRoutes();       
-          System.out.println("\nSpeed: " +fRoutes.getSpeedy());
-          System.out.println("Total Distance: "+fRoutes.getDisTance() + "km");
-          System.out.println("Time of arrival: " + fRoutes.getHours()  +"hr/s,"+fRoutes.getMinutes() + " minutes.\n");
-  }
-}
+ 
