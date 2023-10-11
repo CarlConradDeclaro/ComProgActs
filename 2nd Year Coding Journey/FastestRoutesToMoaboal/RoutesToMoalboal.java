@@ -1,4 +1,4 @@
-      import java.util.*;
+       import java.util.*;
 class RoutesDistance{
         Scanner sc = new Scanner(System.in);
         List<Routes> routes = new ArrayList<>();    
