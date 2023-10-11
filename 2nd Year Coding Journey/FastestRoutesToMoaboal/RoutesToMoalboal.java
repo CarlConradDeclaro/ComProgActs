@@ -38,8 +38,8 @@ class RoutesDistance{
               Routes route1 = new Routes("SouthBustoCarcar",38.3);
               Routes route341 = new Routes("CarCarTobarili",18.1);
               Routes route41413 = new Routes("BariliToMoaboal",30.3);
-              Routes route2 = new Routes("CarCarToSibunga",13.2);
-              Routes route3 = new Routes("SibungaTMoalboal",45.1);
+              Routes route2 = new Routes("CarCarToSibunga",10.2);
+              Routes route3 = new Routes("SibungaToMoalboal",44.4);
                         
             if(!(obstructed.contains("Barili"))){
                  routes.add(route1);
