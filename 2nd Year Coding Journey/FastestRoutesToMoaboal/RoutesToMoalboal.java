@@ -90,7 +90,6 @@ class FindShorstestRoutes{
                System.out.println(r.distination);   
         }       
     }
-
 }
 
 class Routes{
@@ -107,7 +106,6 @@ class Routes{
 
 public class RoutesToMoalboal{
   public static void main (String[]args){
- 
           FindShorstestRoutes fRoutes= new FindShorstestRoutes();
           fRoutes.findBestRoutes();
           fRoutes.displayRoutes();       
