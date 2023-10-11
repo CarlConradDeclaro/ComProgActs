@@ -6,8 +6,7 @@ class FindShorstestRoutes{
         List<String> obstructed = new ArrayList<>();
         private double speedy =0;
 
- 
-    void getObstrutedRoutes(){                 
+   void getObstrutedRoutes(){                 
              System.out.println("Is Barili obstructed? (y/n) ");
              String obs = sc.nextLine().toLowerCase();             
                 if(obs.equals("y")){
@@ -98,6 +97,7 @@ class FindShorstestRoutes{
         return dis;
     }
 
+  
 }
 
 class Routes{
