@@ -38,37 +38,38 @@ class RoutesDistance{
              
                Routes route1_2_3 = new Routes("SouthBus", "Carcar",38.3);
               
-               Routes route3_41 = new Routes("CarCar","barili",17.5);
+               Routes route3_41 = new Routes("CarCar","barili",17.8);
                Routes route41_411 = new Routes("barili","dumanjug",16.9);
                Routes route411_412 = new Routes("Dumanjug","Moalboal",13.3);
               
-               
-
-               
+               Routes route42_421 = new Routes("sibonga","dumanjug",28.5);
+               Routes route421_422 = new Routes("dumanjug","Moalboal",18.9);
 
                Routes route3_42 = new Routes("CarCar","Sibunga",10.2);
                Routes route42_5 = new Routes("Sibunga","Argao",22.3);
                Routes route5_51 = new Routes("Argao","Ronda",21.4);
                Routes route51_52 = new Routes("Ronda","Moalboal",10.4);
             if(!(obstructed.contains("Barili"))){
-                 routes.add(route1);
-                 routes.add(route341);
-                 routes.add(route41413);
-                 TOA =  computeTotalDistance(speedy,getDisTance());
+                 routes.add(route1_2_3);
+                 routes.add(route3_41);
+                 routes.add(route41_411);
+                 routes.add(route411_412);
+               
              }else if( !(obstructed.contains("Dumanjug"))){               
-                 routes.add(route3);
-                 routes.add(route2);
-                 routes.add(route3);
-                 TOA =  computeTotalDistance(speedy,getDisTance());
+                 routes.add(route1_2_3);
+                 routes.add(route3_42);
+                 routes.add(route42_421);
+                 routes.add(route421_422);
+               
              }else {
                 routes.add(route1_2_3);
                 routes.add(route3_42);
                 routes.add(route42_5);
                 routes.add(route5_51);
                 routes.add(route51_52);
-                TOA =  computeTotalDistance(speedy,getDisTance());
+              
              }
-             
+               TOA =  computeTotalDistance(speedy,getDisTance());
              System.out.println("Speed: " + speedy);
              double dd = getDisTance();
              System.out.println("Total Distance: "+dd + "km");
