@@ -6,23 +6,6 @@ class FindShorstestRoutes{
         List<String> obstructed = new ArrayList<>();
         private double speedy =0;
 
-     void getObstrutedRoutes(){                 
-             System.out.println("Is Barili obstructed? (y/n) ");
-             String obs = sc.nextLine().toLowerCase();             
-                if(obs.equals("y")){
-                    obstructed.add("Barili");
-                    System.out.println("Is Dumanjug obstructed? (y/n) ");
-                    String ans = sc.nextLine().toLowerCase();
-                    if(ans.equals("y"))
-                        obstructed.add("Dumanjug");                 
-                } 
-     }
-
-     void askSpeed(){
-             System.out.println("Enter Speed ");
-             speedy = sc.nextDouble();
-     }
-    
      void findBestRoutes(){   
 
                getObstrutedRoutes();
@@ -61,6 +44,7 @@ class FindShorstestRoutes{
                 routes.add(route51_52);            
              }         
     }  
+    
 
     double computeTotalDistance(double speed, double dis){
         return (dis/ speed  ) * 60;
@@ -84,7 +68,23 @@ class FindShorstestRoutes{
              dis+=d.distance;
         return dis;
     }
-    
+
+    void getObstrutedRoutes(){                 
+             System.out.println("Is Barili obstructed? (y/n) ");
+             String obs = sc.nextLine().toLowerCase();             
+                if(obs.equals("y")){
+                    obstructed.add("Barili");
+                    System.out.println("Is Dumanjug obstructed? (y/n) ");
+                    String ans = sc.nextLine().toLowerCase();
+                    if(ans.equals("y"))
+                        obstructed.add("Dumanjug");                 
+                } 
+     }
+
+     void askSpeed(){
+             System.out.println("Enter Speed ");
+             speedy = sc.nextDouble();
+     }
     void displayRoutes(){
         System.out.println("\t <<< Best Routes >>>\n");   
         for(Routes r : routes){
