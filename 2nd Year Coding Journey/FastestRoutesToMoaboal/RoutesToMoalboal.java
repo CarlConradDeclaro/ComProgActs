@@ -35,22 +35,35 @@ class RoutesDistance{
              System.out.println("Enter Speed ");
              double speedy = sc.nextDouble();
              
+              Routes route1 = new Routes("SouthBustoCarcar",38.3);
+              Routes route341 = new Routes("CarCarTobarili",18.1);
+              Routes route41413 = new Routes("BariliToMoaboal",30.3);
+              Routes route2 = new Routes("CarCarToSibunga",13.2);
+              Routes route3 = new Routes("SibungaTMoalboal",45.1);
+              
+              
+             
+             
             if(!(obstructed.contains("Barili"))){
-                 Routes route13 = new Routes("SouthBustoCarcar",38.3);
-                 Routes route341 = new Routes("CarCarTobarili",18.1);
-                 Routes route41413 = new Routes("BariliToMoaboal",30.3);
-                 routes.add(route13);
+                 routes.add(route1);
                  routes.add(route341);
                  routes.add(route41413);
                  TOA =  computeTotalDistance(speedy,getDisTance());
              }else if( !(obstructed.contains("Dumanjug"))  ){
-                 Routes route1 = new Routes("SouthBustoCarcar",38.3);
-                 Routes route2 = new Routes("CarCarToSibunga",13.2);
-                 Routes route3 = new Routes("SibungaTMoalboal",45.1);
+               
                  routes.add(route3);
                  routes.add(route2);
                  routes.add(route3);
                  TOA =  computeTotalDistance(speedy,getDisTance());
+             }else {
+                routes.add(route1);
+                routes.add(route2);
+                routes.add(route3);
+
+                 TOA =  computeTotalDistance(speedy,getDisTance());
+
+
+
              }
              
              System.out.println("Speed: " + speedy);
