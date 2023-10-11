@@ -5,23 +5,35 @@ class FindShorstestRoutes{
         List<Routes> routes = new ArrayList<>();    
         List<String> obstructed = new ArrayList<>();
         private double speedy =0;
-    
-     void findBestRoutes(){    
-                               
+
+     void getObstrutedRoutes(){                 
              System.out.println("Is Barili obstructed? (y/n) ");
              String obs = sc.nextLine().toLowerCase();             
-             if(obs.equals("y")){
-                 obstructed.add("Barili");
+                if(obs.equals("y")){
+                    obstructed.add("Barili");
                     System.out.println("Is Dumanjug obstructed? (y/n) ");
                     String ans = sc.nextLine().toLowerCase();
-                        if(ans.equals("y")){
-                            obstructed.add("Dumanjug");
-                        }
-             }          
-               System.out.println("Enter Speed ");
-               speedy = sc.nextDouble();
-             
-               Routes route1_2_3 = new Routes("SouthBus", "Carcar",38.3);
+                    if(ans.equals("y"))
+                        obstructed.add("Dumanjug");                 
+                } 
+     }
+
+     void askSpeed(){
+             System.out.println("Enter Speed ");
+             speedy = sc.nextDouble();
+     }
+    
+     void findBestRoutes(){   
+
+               getObstrutedRoutes();
+               askSpeed();
+
+               Routes route1 = new Routes("SouthBus\t -> \tStart", "Mingla",14.2);
+               Routes route2 = new Routes("Minglanilia\t -> \tRoute 1", "San Fernando",13.3);
+               Routes route3 = new Routes("San Fernando\t -> \tRoute 2", "Carcar",10.8);
+               routes.add(route1);
+               routes.add(route2);
+               routes.add(route3);
               
                Routes route3_41 = new Routes("CarCar\t\t -> \tRoute 3","barili",17.8);
                Routes route41_411 = new Routes("barili\t\t -> \tRoute 4.1","dumanjug ",16.9);
@@ -35,19 +47,16 @@ class FindShorstestRoutes{
                Routes route5_51 = new Routes("Argao\t\t -> \tRoute 5","Ronda",21.4);
                Routes route51_52 = new Routes("Ronda\t\t -> \tRoute 5.1","Moalboal\t -> \tRoute 5.2\n",10.4);
         
-            if(!(obstructed.contains("Barili"))){
-                 routes.add(route1_2_3);
+            if(!(obstructed.contains("Barili"))){   
                  routes.add(route3_41);
                  routes.add(route41_411);
                  routes.add(route411_412);  
 
-             }else if( !(obstructed.contains("Dumanjug"))){               
-                 routes.add(route1_2_3);
+             }else if( !(obstructed.contains("Dumanjug"))){                              
                  routes.add(route3_42);
                  routes.add(route42_421);
                  routes.add(route421_422);              
-             }else {
-                routes.add(route1_2_3);
+             }else {               
                 routes.add(route3_42);
                 routes.add(route42_5);
                 routes.add(route5_51);
@@ -79,10 +88,7 @@ class FindShorstestRoutes{
     }
     
     void displayRoutes(){
-        System.out.println("\t <<< Best Routes >>>");
-        System.out.println("\nCebu city \t -> \tStart");
-        System.out.println("Minglanilia \t -> \tRoute 1");
-        System.out.println("San Fernando \t -> \tRoute 2");
+        System.out.println("\n\t<<< Best Routes >>>\n");
         for(Routes r : routes){
             if(!(r.startingPoint.equals("SouthBus")))
                System.out.println(r.startingPoint);   
