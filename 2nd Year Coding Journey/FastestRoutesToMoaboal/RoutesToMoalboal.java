@@ -1,4 +1,4 @@
-     import java.util.*;
+      import java.util.*;
 class RoutesDistance{
         Scanner sc = new Scanner(System.in);
         List<Routes> routes = new ArrayList<>();    
@@ -17,7 +17,7 @@ class RoutesDistance{
     
      void printRoutes(){
            
-            obstructed.add("Dumanjug");
+            
              double TOA =0;
              
              System.out.println("Is Barili obstructed? (y/n) ");
@@ -27,7 +27,7 @@ class RoutesDistance{
                  obstructed.add("Barili");
                   System.out.println("Is Dumanjug obstructed? (y/n) ");
                   String ans = sc.nextLine().toLowerCase();
-                  if(ans.equals("n")){
+                  if(ans.equals("y")){
                        obstructed.add("Dumanjug");
                   }
              }
@@ -43,8 +43,7 @@ class RoutesDistance{
                  routes.add(route341);
                  routes.add(route41413);
                  TOA =  computeTotalDistance(speedy,getDisTance());
-             }
-             if(!(obstructed.contains("Dumanjug")) && !(obstructed.contains("Barili")) ){
+             }else if( !(obstructed.contains("Dumanjug"))  ){
                  Routes route1 = new Routes("SouthBustoCarcar",38.3);
                  Routes route2 = new Routes("CarCarToSibunga",13.2);
                  Routes route3 = new Routes("SibungaTMoalboal",45.1);
