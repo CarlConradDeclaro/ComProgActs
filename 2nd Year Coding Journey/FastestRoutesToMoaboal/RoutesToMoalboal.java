@@ -35,17 +35,15 @@ class FindShorstestRoutes{
                routes.add(route2);
                routes.add(route3);
               
-               Routes route3_41 = new Routes("CarCar\t\t -> \t\t","barili","Route 3",17.8);
-               Routes route41_411 = new Routes("barili\t\t -> \t","dumanjug","Route 4.1",16.9);
-               Routes route411_412 = new Routes("Dumanjug\t -> \t","Moalboal\t -> \tRoute 4.1.2","Route 4.1.1",13.3);
-              
-               Routes route42_421 = new Routes("sibonga\t\t -> \t\t","dumanjug","Route 4.2",28.5);
-               Routes route421_422 = new Routes("dumanjug\t -> \t\t","Moalboal\t -> \tRoute 4.2.2\n","Route 4.2.1",18.9);
+               Routes route3_41 = new Routes("CarCar","barili","Route 3",17.8);
+               Routes route41_411 = new Routes("barili","dumanjug","Route 4.1",16.9);
+               Routes route411_412 = new Routes("Dumanjug","Moalboal\t-> \tRoute 4.1.2","Route 4.1.1",13.3);                                                                                                                                                                                                                                                                                                                                                            Routes route42_421 = new Routes("sibonga","dumanjug","Route 4.2",28.5);
+               Routes route421_422 = new Routes("dumanjug","Moalboal\t-> \tRoute 4.2.2","Route 4.2.1",18.9);
 
-               Routes route3_42 = new Routes("CarCar\t\t -> \t\t","Sibunga","Route 3",10.2);
-               Routes route42_5 = new Routes("Sibunga\t\t -> \t\t","Argao","Route 4.2",22.3);
-               Routes route5_51 = new Routes("Argao\t\t -> \t\t","Ronda","Route 5",21.4);
-               Routes route51_52 = new Routes("Ronda\t\t -> \t\t","Moalboal\t -> \tRoute 5.2","Route 5.1",10.4);
+               Routes route3_42 = new Routes("CarCar","Sibunga","Route 3",10.2);
+               Routes route42_5 = new Routes("Sibunga","Argao","Route 4.2",22.3);
+               Routes route5_51 = new Routes("Argao","Ronda","Route 5",21.4);
+               Routes route51_52 = new Routes("Ronda","Moalboal\t-> \tRoute 5.2","Route 5.1",10.4);
         
             if(!(obstructed.contains("Barili"))){   
                  routes.add(route3_41);
@@ -91,11 +89,11 @@ class FindShorstestRoutes{
         System.out.println("\t <<< Best Routes >>>\n");   
         for(Routes r : routes){
             if(!(r.startingPoint.contains("SouthBus")))
-                 System.out.printf("%-25s %-25s %.1f%n",r.startingPoint,"->",r.distance);
+                 System.out.printf("%-15s %-7s %-15s %.1f%n",r.startingPoint,"->",r.route,r.distance);
             else  
-                System.out.println(r.startingPoint ); 
+                System.out.printf("%-15s %-7s %-15s%n",r.startingPoint,"->",r.route);
             if(r.distination.contains("Moalboal"))   
-               System.out.println(r.distination+"\t\t"+r.distance+"km");   
+               System.out.println(r.distination+"\t"+r.distance+"km");   
         }       
     }
 }
