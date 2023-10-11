@@ -1,4 +1,4 @@
-   import java.util.*;
+     import java.util.*;
 class RoutesDistance{
         Scanner sc = new Scanner(System.in);
         List<Routes> routes = new ArrayList<>();    
@@ -21,10 +21,15 @@ class RoutesDistance{
              double TOA =0;
              
              System.out.println("Is Barili obstructed? (y/n) ");
-             String obs = sc.nextLine();
+             String obs = sc.nextLine().toLowerCase();
              
              if(obs.equals("y")){
                  obstructed.add("Barili");
+                  System.out.println("Is Dumanjug obstructed? (y/n) ");
+                  String ans = sc.nextLine().toLowerCase();
+                  if(ans.equals("n")){
+                       obstructed.add("Dumanjug");
+                  }
              }
              
              System.out.println("Enter Speed ");
@@ -38,18 +43,17 @@ class RoutesDistance{
                  routes.add(route341);
                  routes.add(route41413);
                  TOA =  computeTotalDistance(speedy,getDisTance());
-                 
-             }else if(!(obstructed.contains("Dumanjug"))){
-                 Routes route13 = new Routes("SouthBustoCarcar",38.3);
-                 Routes route341 = new Routes("CarCarToSibunga",18.1);
-                 Routes route41413 = new Routes("BariliToMoaboal",30.3);
-                 routes.add(route13);
-                 routes.add(route341);
-                 routes.add(route41413);
-                 
-             }else {
-             
              }
+             if(!(obstructed.contains("Dumanjug")) && !(obstructed.contains("Barili")) ){
+                 Routes route1 = new Routes("SouthBustoCarcar",38.3);
+                 Routes route2 = new Routes("CarCarToSibunga",13.2);
+                 Routes route3 = new Routes("SibungaTMoalboal",45.1);
+                 routes.add(route3);
+                 routes.add(route2);
+                 routes.add(route3);
+                 TOA =  computeTotalDistance(speedy,getDisTance());
+             }
+             
              System.out.println("Speed: " + speedy);
              double dd = getDisTance();
              System.out.println("Total Distance: "+dd + "km");
