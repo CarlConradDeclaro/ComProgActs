@@ -40,10 +40,7 @@ class RoutesDistance{
               Routes route41413 = new Routes("BariliToMoaboal",30.3);
               Routes route2 = new Routes("CarCarToSibunga",13.2);
               Routes route3 = new Routes("SibungaTMoalboal",45.1);
-              
-              
-             
-             
+                        
             if(!(obstructed.contains("Barili"))){
                  routes.add(route1);
                  routes.add(route341);
@@ -71,7 +68,7 @@ class RoutesDistance{
              System.out.println("Total Distance: "+dd + "km");
              int hour = (int)TOA/60;
              int minutes = (int)TOA%60;
-             System.out.println("Time of arrival: " + hour  +"hr,"+minutes + " minutes.");
+             System.out.println("Time of arrival: " + hour  +"hr/s,"+minutes + " minutes.");
     }
 }
 
