@@ -131,7 +131,7 @@ class MyArray extends Exception {
             //this will throw an execption if the array is full and also it will return boolean value;       
             try{
                 if(getCount() > getSize()-1 )
-                throw new MyArray("\n + <<<Array is Full!>>>");
+                throw new MyArray("\n<<<Array is Full!>>>");
             }catch(MyArray e){
                         System.out.println(e.getMessage());
             }       
