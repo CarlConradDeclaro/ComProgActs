@@ -28,7 +28,7 @@ class SetsElements{
          System.out.println("Enter -1 to stop");
          System.out.println("Enter element: ");
           
-        do{
+        while(run){
             String ans = sc.nextLine();
            
             if(!ans.equals("-1")){
@@ -36,25 +36,19 @@ class SetsElements{
             }else 
                run = false;
 
-        }while(run);
+        }
 
         return elements;
     }
     
     public void createSets(){
-       
-       boolean run = true; 
-        do{
-            System.out.print("Enter name of the set: "); 
-            String name = sc.nextLine();
-            sets.put(name,setSets());
 
-            System.out.print("Do you want to Create another Set? (y/n) ");
-            String ans = sc.nextLine();
-            if(ans.equals("n"))
-            run = false;
+            System.out.println("Enter elements for the set A:  ");          
+            sets.put("A",setSets());
 
-        }while(run);
+            System.out.println("Enter elements for the set B:  ");
+            sets.put("B",setSets());
+     
     }
 
     public void displaySets(){
@@ -81,8 +75,10 @@ public class SetsCalcu {
         setElements.createSets();
         setElements.displaySets();
 
-        System.out.println("NEW HASHMAP");
+      
         Evaluator ev = new Evaluator(setElements.getSets());
-        ev.displaySet();
+        ev.getA().getB().UNION();
+      
+       
     }
 }
