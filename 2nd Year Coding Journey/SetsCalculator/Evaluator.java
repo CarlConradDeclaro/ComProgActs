@@ -49,7 +49,7 @@ public class Evaluator {
          
          switch(sc.nextInt()){
                 case 1 :
-                     
+                     getA().getB().UNION();
                     break;
                 case 2 :
                     break;
@@ -78,8 +78,6 @@ public class Evaluator {
                 default:
                   System.out.println("");          
          }
-
-
     }
 
     public void UNION(){ 
@@ -87,8 +85,7 @@ public class Evaluator {
     }
 
 
-    Evaluator getA(){
-           
+    Evaluator getA(){         
             for(Map.Entry<String,List<String>> hashmap : newHashMap.entrySet()){      
                     List<String> values = hashmap.getValue();
                     if(hashmap.getKey() == "A")
@@ -99,8 +96,7 @@ public class Evaluator {
            return this;   
         }
       
-        Evaluator getB(){
-          
+        Evaluator getB(){     
             for(Map.Entry<String,List<String>> hashmap : newHashMap.entrySet()){      
                     List<String> values = hashmap.getValue();
                     if(hashmap.getKey() == "B")
