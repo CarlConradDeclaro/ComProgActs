@@ -4,9 +4,39 @@ class FindShorstestRoutes{
         Scanner sc = new Scanner(System.in);
         List<Routes> routes = new ArrayList<>();    
         List<String> obstructed = new ArrayList<>();
-        private double speedy =0;
+        private double speedy;
+        private double ETA;//ESTIMATED TIME OF ARRIVAL
+        private int  hours;
+        private int minutes;
+        private double totalDistance;
 
-     void findBestRoutes(){   
+        public FindShorstestRoutes computeTotalDistance(double speed, double dis){
+            ETA = (dis/ speed  ) * 60;
+            return this;
+        }    
+    
+        public FindShorstestRoutes getHours(){
+            hours = (int)ETA/60; 
+            return this;
+        }  
+
+        public FindShorstestRoutes getMinutes(){
+            minutes = (int)ETA%60;
+            return this;
+        }
+        
+        public double getSpeedy(){
+            return speedy;
+        }  
+
+        public double computeDisTance(){
+            totalDistance =0;
+            for(Routes d : routes)
+                totalDistance+=d.getDistance();
+            return totalDistance;
+        }
+
+        public void findBestRoutes(){   
 
                getObstrutedRoutes();
                askSpeed();
@@ -33,92 +63,77 @@ class FindShorstestRoutes{
                  routes.add(route41_411);
                  routes.add(route411_412);  
 
-             }else if( !(obstructed.contains("Dumanjug"))){                              
+            }else if( !(obstructed.contains("Dumanjug"))){                              
                  routes.add(route3_42);
                  routes.add(route42_421);
                  routes.add(route421_422);              
-             }else {               
-                routes.add(route3_42);
-                routes.add(route42_5);
-                routes.add(route5_51);
-                routes.add(route51_52);            
+            }else {               
+                 routes.add(route3_42);
+                 routes.add(route42_5);
+                 routes.add(route5_51);
+                 routes.add(route51_52);            
              }         
     }  
-    
 
-    double computeTotalDistance(double speed, double dis){
-        return (dis/ speed  ) * 60;
-    }    
-
-    double getSpeedy(){
-        return speedy;
-    }  
-
-    int getHours(){
-        return (int)(computeTotalDistance(getSpeedy(),getDisTance()))/60; 
-    }  
-
-    int getMinutes(){
-        return (int)(computeTotalDistance(getSpeedy(),getDisTance()))%60;
-    }
-
-    double getDisTance(){
-        double dis=0;
-        for(Routes d : routes)
-             dis+=d.distance;
-        return dis;
-    }
-
-    void getObstrutedRoutes(){                 
-             System.out.println("Is Barili obstructed? (y/n) ");
-             String obs = sc.nextLine().toLowerCase();             
+        public void getObstrutedRoutes(){                 
+                System.out.println("Is Barili obstructed? (y/n) ");
+                String obs = sc.nextLine().toLowerCase();             
+                
                 if(obs.equals("y")){
                     obstructed.add("Barili");
                     System.out.println("Is Dumanjug obstructed? (y/n) ");
                     String ans = sc.nextLine().toLowerCase();
                     if(ans.equals("y"))
-                        obstructed.add("Dumanjug");                 
-                } 
-     }
+                    obstructed.add("Dumanjug");                 
+                    } 
+        }
 
-     void askSpeed(){
-             System.out.println("Enter Speed ");
-             speedy = sc.nextDouble();
-     }
-    void displayRoutes(){
-        System.out.println("\t <<< Best Routes >>>\n");   
-        for(Routes r : routes){
-            if(!(r.startingPoint.contains("SouthBus")))
-                 System.out.printf("%-15s %-7s %-15s %.1f%n",r.startingPoint,"->",r.route,r.distance);
-            else  
-                System.out.printf("%-15s %-7s %-15s%n",r.startingPoint,"->",r.route);
-            if(r.distination.contains("Moalboal"))   
-               System.out.println(r.distination+"\t"+r.distance+"km");   
-        }       
-    }
+        public void askSpeed(){
+                System.out.println("Enter Speed ");
+                speedy = sc.nextDouble();
+        }
+        public void displayRoutes(){
+            System.out.println("\t <<< Best Routes >>>\n");   
+            for(Routes r : routes){
+                if(!(r.getStartingPoint().contains("SouthBus")))
+                    System.out.printf("%-15s %-7s %-15s %.1f%n",r.getStartingPoint(),"->",r.getRoute() ,r.getDistance());
+                else  
+                    System.out.printf("%-15s %-7s %-15s%n",r.getStartingPoint(),"->",r.getRoute());
+                if(r.getDistination() .contains("Moalboal"))   
+                System.out.println(r.getDistination() +"\t"+r.getDistance()+"km");   
+            }       
+        }
+        public void print(){
+            System.out.println("\nSpeed: " +speedy);
+            System.out.println("Total Distance: "+totalDistance + "km");
+            System.out.println("Estimaed Time Of Arrival: " + hours  +"hr/s,"+ minutes + " minutes.\n");
+        }
 }
 
 class Routes{
-        String startingPoint;
-        String distination;
-        String route;
-         double distance;
-         Routes(){}
-         Routes(String startingPoint,String distination,String route,double distance){
+    private  String startingPoint;
+    private String distination;
+    private String route;
+    private  double distance;
+    
+    Routes(){}
+    Routes(String startingPoint,String distination,String route,double distance){
              this.startingPoint = startingPoint ;
              this.distination = distination;
              this.route =route;
              this.distance =distance;
-            }    
+    }    
+    public String getStartingPoint(){return startingPoint;}
+    public String getDistination() {return distination;}   
+    public String getRoute() {return route;}   
+    public double getDistance() {return distance;}       
 }
 
 public class RoutesToMoalboal{
   public static void main (String[]args){
           FindShorstestRoutes fRoutes= new FindShorstestRoutes();
           fRoutes.findBestRoutes();
-          fRoutes.displayRoutes();       
-          System.out.println("\nSpeed: " +fRoutes.getSpeedy());
-          System.out.println("Total Distance: "+fRoutes.getDisTance() + "km");
-          System.out.println("Time of arrival: " + fRoutes.getHours()  +"hr/s,"+fRoutes.getMinutes() + " minutes.\n");
+          fRoutes.displayRoutes();      
+          fRoutes.computeTotalDistance(fRoutes.getSpeedy(), fRoutes.computeDisTance()).getHours().getMinutes().print();       
   }
 }
