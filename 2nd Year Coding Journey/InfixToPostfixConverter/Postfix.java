@@ -47,7 +47,7 @@ public class Postfix {
                      operators.pop();
                 }
              }else if( isOperator(c) ){                                                 
-                while(operators.size()>1  &&   opertarPrecendence(operators.peek()) >= opertarPrecendence(c)){
+                while(!operators.isEmpty()  &&   opertarPrecendence(operators.peek()) >= opertarPrecendence(c)){
                      s.append(operators.pop());
                 } 
                 operators.add(c);        
@@ -64,7 +64,7 @@ public class Postfix {
 
     public static void main(String[] args) {
        
-        postFix("(8-2) * 7 + 5 / (3 - 1)"); 
+        postFix("8-2 * 7 + 5 / (3 - 1)"); 
        
     }
 }
