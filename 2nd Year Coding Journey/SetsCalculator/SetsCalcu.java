@@ -77,7 +77,7 @@ public class SetsCalcu {
 
       
         Evaluator ev = new Evaluator(setElements.getSets());
-        ev.getA().getB().UNION();
+        
       
        
     }
