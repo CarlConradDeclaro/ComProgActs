@@ -1,4 +1,4 @@
- package InfixToPostfixConverter;
+package InfixToPostfixConverter;
 
 import java.util.Stack;
 
