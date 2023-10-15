@@ -4,24 +4,25 @@ import java.util.Stack;
 
 public class Postfix {
 
-    static int  opertarPrecendence(int a, int b,String op){
+    static int  opertarPrecendence(char op){
         switch(op){
-            case "+" :
-                    return a+b;           
-            case "-" :
-                    return a+b;
+            case '+' :
+                    return 1;           
+            case '-' :
+                    return 1;
                   
-            case "*" :
-                    return a+b;
+            case '*' :
+                    return 2;
                 
-            case "/" :
-                    return a+b;                                             
+            case '/' :
+                    return 2;           
+                                                  
         }
         return 0;       
     }
     
     static boolean isOperator(char op){
-        return op == '+' || op=='-' || op == '*' || op == '/' || op == '(';
+        return op == '+' || op=='-' || op == '*' || op == '/' || op=='(';
     }
     
     static void postFix(String expression){
@@ -31,27 +32,38 @@ public class Postfix {
       
         for (int i = 0; i < expression.length(); i++) {
             char c = expression.charAt(i);
-     //(1+2)/2+1
-             if( c == ')'){
-               while(!operators.isEmpty() && operators.peek() != '('){
-                s+=operators.pop();
-               }
-             }else if( isOperator(c)){
-               operators.add(c);
+             
+                
+              if( isOperator(c)){                                                 
+               while(operators.size()>1  &&   opertarPrecendence(operators.peek()) >= opertarPrecendence(c)){
+                  s+=operators.pop();
+               } 
+
+                operators.add(c);        
+
              }else if(Character.isDigit(c)){
                 s+=c;
-             }
-            
-       
+             } else  if(c == ')'){
+                while(!operators.isEmpty() && operators.peek() != '('){                
+                      s+=operators.pop();         
+                }
+             }                 
+        }
 
+        while(!operators.isEmpty() ){
+           if(operators.peek() != '('){
+             s+=operators.pop();
+           }else
+             operators.pop();
         }
          System.out.println(s);
-        System.out.println(operators);
-     } 
+      } 
 
 
     public static void main(String[] args) {
        
-        postFix("(1+2)/2+1");
+        postFix("(8 - 2) * 7 + 5 / (3 - 1)"); 
+        //  +/(
+        //   82-7*5
     }
 }
