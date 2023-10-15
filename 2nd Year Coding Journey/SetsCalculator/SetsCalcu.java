@@ -7,7 +7,6 @@ import java.util.Map;
 import java.util.Scanner;
 
 class Sets{  
-    // 
     String name;
     List<String> sets;
     Sets(String name,List<String>sets){
@@ -16,13 +15,13 @@ class Sets{
     }
 }
 
-
 class SetsElements{
         
     HashMap<String,List<String>> sets = new HashMap<>();
     Scanner sc = new Scanner(System.in); 
 
     public List<String> setSets(){
+        
         List<String> elements = new ArrayList<>();
 
         boolean run = true;
@@ -45,45 +44,45 @@ class SetsElements{
     public void createSets(){
        
        boolean run = true; 
-      do{
-        System.out.print("Enter name of the set: "); 
-        String name = sc.nextLine();
-        sets.put(name,setSets());
+        do{
+            System.out.print("Enter name of the set: "); 
+            String name = sc.nextLine();
+            sets.put(name,setSets());
 
-        System.out.print("Do you want to Create another Set? (y/n) ");
-        String ans = sc.nextLine();
-        if(ans.equals("n"))
-          run = false;
+            System.out.print("Do you want to Create another Set? (y/n) ");
+            String ans = sc.nextLine();
+            if(ans.equals("n"))
+            run = false;
 
-      }while(run);
-        
-         
-
+        }while(run);
     }
 
     public void displaySets(){
-
-      for(Map.Entry<String,List<String>> hashmap : sets.entrySet()){
-          String key = hashmap.getKey();
-          List<String> values = hashmap.getValue();
-          System.out.print(key + " = ");
-          System.out.print("{ ");
-            for (String value : values) {
-                System.out.print(value + " ");
+            for(Map.Entry<String,List<String>> hashmap : sets.entrySet()){
+                String key = hashmap.getKey();
+                List<String> values = hashmap.getValue();
+                System.out.print(key + " = ");
+                System.out.print("{ ");
+                    for (String value : values) {
+                        System.out.print(value + " ");
+                    }
+                System.out.println(" }");
             }
-          System.out.println(" }");
-      }
-
     }
 
-
+    public HashMap<String,List<String>> getSets(){
+        return sets;
+    }
 }
-
 
 public class SetsCalcu {
     public static void main(String[] args) {
         SetsElements setElements = new SetsElements();
         setElements.createSets();
         setElements.displaySets();
+
+        System.out.println("NEW HASHMAP");
+        Evaluator ev = new Evaluator(setElements.getSets());
+        ev.displaySet();
     }
 }
