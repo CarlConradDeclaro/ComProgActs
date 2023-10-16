@@ -1,10 +1,10 @@
-import java.util.Scanner;
-
+ import java.util.*;
 class MyArray extends Exception {
    int[] arr;
    int size,count;
    Scanner sc = new Scanner(System.in);
-
+   
+   MyArray(){}
    MyArray(String str){
       super(str);
    }
@@ -141,17 +141,35 @@ class MyArray extends Exception {
     public int getSize() { return size; }
 
     public int getCount() { return count; }
-   
-}
+    
+    
+    public int evalauteInput(){
+     boolean r =false;
+     int size=0;
+     System.out.print("\n            Welcome. \nEnter desired size for your array \nSize: ");
+        while(!r){           
+            try{         
+            size  = sc.nextInt();
+            r = true;                                        
+            }catch(InputMismatchException e){
+              System.out.println("Input inValid");
+              sc.next();
+            }         
+        }  
+       return size;
+    }
+    
+    }
 
 
 public class Array {
     
     public static void main(String[] args) {
 
-        Scanner sc = new Scanner(System.in);            
-        System.out.print("\n            Welcome. \nEnter desired size for your array \nSize: ");
-        int size = sc.nextInt();
+        Scanner sc = new Scanner(System.in);   
+        MyArray myArr = new MyArray();
+                   
+        int size = myArr.evalauteInput();    
         MyArray myArray = new MyArray(size);
        
         boolean run = true;
