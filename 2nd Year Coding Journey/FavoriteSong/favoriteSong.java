@@ -10,7 +10,6 @@ class FavoriteLines{
 public class favoriteSong{
         public static void main(String[] args) {
            
-           FavoriteLines favLines =  new FavoriteLines();
-           
+           FavoriteLines favLines =  new FavoriteLines();           
         }
 }
