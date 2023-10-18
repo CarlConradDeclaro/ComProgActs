@@ -84,6 +84,7 @@ public class Evaluator {
          System.out.println(A.equals(B));
     }
 
+    
 
     Evaluator getA(){         
             for(Map.Entry<String,List<String>> hashmap : newHashMap.entrySet()){      
@@ -113,12 +114,4 @@ public class Evaluator {
     public HashMap<String,List<String>> getNewhashMap(){
             return newHashMap;
      }   
-     
-        
-           
-       
-    
-
-    
-
 }

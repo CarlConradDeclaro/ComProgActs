@@ -74,11 +74,8 @@ public class SetsCalcu {
         SetsElements setElements = new SetsElements();
         setElements.createSets();
         setElements.displaySets();
-
       
         Evaluator ev = new Evaluator(setElements.getSets());
-        
-      
        
     }
 }
