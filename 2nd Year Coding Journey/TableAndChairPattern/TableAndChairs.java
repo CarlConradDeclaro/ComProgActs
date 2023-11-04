@@ -1,4 +1,3 @@
-
 package TableAndChairPattern;
 
 class TableAndChairs{
