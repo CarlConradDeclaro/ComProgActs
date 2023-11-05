@@ -1,5 +1,4 @@
 package TableAndChairPattern;
-
 class TableAndChairs{
 
       static void DynamicTableAndChair(int x,int y){
