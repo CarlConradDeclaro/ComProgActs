@@ -4,7 +4,7 @@ import java.util.*;
 public class PostFixToInfixConverter {
      
 
-  
+
   static void convertPostfixToInfix(String s){
        Stack<String> infix = new Stack<>();
        
