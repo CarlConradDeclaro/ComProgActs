@@ -1,5 +1,4 @@
 package InfixToPostfixConverter;
-
 import java.util.Stack;
 
 public class Postfix {
