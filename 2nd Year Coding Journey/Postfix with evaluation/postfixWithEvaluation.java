@@ -119,7 +119,7 @@ class pmdasStack {
         String expression = sc.nextLine();
         int result = pmdas.calculatePMDAS(expression);
         System.out.println("\nPostfix: " + pmdas.getPostfix());
-        System.out.println("Evaluationgfgn9=1: ");
+        System.out.println("test: ");
         pmdas.displauEvaluation();
         System.out.println("\nRESULT: " + result +"\n");
     }
