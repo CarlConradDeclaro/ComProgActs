@@ -115,12 +115,11 @@ class pmdasStack {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         PMDAS pmdas = new PMDAS();
-        System.out.print("Enter an expression: ");
+        System.out.print("\nEnter an expression: ");
         String expression = sc.nextLine();
-
         int result = pmdas.calculatePMDAS(expression);
         System.out.println("\nPostfix: " + pmdas.getPostfix());
-        System.out.println("\nEvaluation: ");
+        System.out.println("Evaluationgfgn9=1: ");
         pmdas.displauEvaluation();
         System.out.println("\nRESULT: " + result +"\n");
     }
