@@ -1,5 +1,6 @@
  import java.util.*;
 
+
 class FindShorstestRoutes{
         Scanner sc = new Scanner(System.in);
         List<Routes> routes = new ArrayList<>();    
