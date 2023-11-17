@@ -9,7 +9,6 @@ class PMDAS{
       static Stack<Character> operators = new Stack<>();
       static StringBuilder posfix = new StringBuilder();
       static ArrayList<String> evalutaion = new ArrayList<>();
-
     public static int calculatePMDAS(String expression) {
        
         for (int i = 0; i < expression.length(); i++) {
