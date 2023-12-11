@@ -1,0 +1,84 @@
+class Node{
+    int key;
+    Node left,right;
+    
+    Node(int key){
+        this.key = key;
+        left = right =null;
+    }
+}
+
+
+class BinaryTree{
+    
+    Node root;
+    
+    BinaryTree(){}
+    BinaryTree(int key){
+        root = new Node(key);
+    }
+    
+    
+ 
+    
+    BinaryTree insert(int key){
+        
+        
+        if(root == null)
+            root = new Node(key);
+        else    
+            insert(root, key);
+        
+        return this;
+           
+    }
+    
+    void insert(Node node, int key){
+        
+     
+        if(key < node.key){
+            if(node.left == null)
+                node.left = new Node(key);
+            else{
+                insert(node.left,key);
+            }        
+        }else if(key > root.key){
+             if(node.right == null)
+                node.right = new Node(key);
+            else{
+                insert(node.right,key);
+            }   
+        }
+           
+    }
+    
+     void inOrder(Node node){
+        if(node == null)
+        return;
+        
+        inOrder(node.left);
+        System.out.print(node.key + " ");
+        inOrder(node.right);
+    }
+    
+}
+ 
+   
+ 
+//     1
+//   2   3 
+//         4 
+    
+ 
+public class Main
+{
+	public static void main(String[] args) {
+		BinaryTree tree = new BinaryTree();
+		
+		
+	tree.insert(1).insert(2).insert(3);
+	
+		tree.inOrder(tree.root);
+		
+	}
+}
