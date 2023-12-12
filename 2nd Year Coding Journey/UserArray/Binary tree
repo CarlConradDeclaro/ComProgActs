@@ -1,83 +1,160 @@
-class Node{
+  class Node {
     int key;
-    Node left,right;
-    
-    Node(int key){
+    Node left, right;
+
+    Node(int key) {
         this.key = key;
-        left = right =null;
+        left = right = null;
     }
 }
 
-class BinaryTree{
-    
+class BinaryTree {
+
     Node root;
-    
-    BinaryTree(){}
-    BinaryTree(int key){
+
+    BinaryTree() {
+        root = null;
+    }
+
+    BinaryTree(int key) {
         root = new Node(key);
     }
-    
-    
- 
-    
-    BinaryTree insert(int key){
-        
-        
-        if(root == null)
+
+    BinaryTree insert(int key) {
+        if (root == null)
             root = new Node(key);
-        else    
+        else
             insert(root, key);
-        
+
         return this;
-           
     }
-    
-    void insert(Node node, int key){
-        
-     
-        if(key < node.key){
-            if(node.left == null)
+
+    void insert(Node node, int key) {
+        if (key < node.key) {
+            if (node.left == null)
                 node.left = new Node(key);
-            else{
-                insert(node.left,key);
-            }        
-        }else if(key > root.key){
-             if(node.right == null)
+            else {
+                insert(node.left, key);
+            }
+        } else if (key > node.key) {
+            if (node.right == null)
                 node.right = new Node(key);
-            else{
-                insert(node.right,key);
-            }   
+            else {
+                insert(node.right, key);
+            }
         }
-           
     }
-    
-     void inOrder(Node node){
-        if(node == null)
-        return;
-        
-        inOrder(node.left);
-        System.out.print(node.key + " ");
-        inOrder(node.right);
+
+    void inOrder(Node node) {
+        if (node != null) {
+            inOrder(node.left);
+            System.out.print(node.key + " ");
+            inOrder(node.right);
+        }
     }
-    
+
+    void postOrder(Node node) {
+        if (node != null) {
+            postOrder(node.left);
+            postOrder(node.right);
+            System.out.print(node.key + " ");
+        }
+    }
+
+    void preOrder(Node node) {
+        if (node != null) {
+            System.out.print(node.key + " ");
+            preOrder(node.left);
+            preOrder(node.right);
+        }
+    }
+
+    Node search(Node root, int key) {
+        if (root == null || root.key == key)
+            return root;
+
+        if (key < root.key)
+            return search(root.left, key);
+
+        return search(root.right, key);
+    }
+
+    Node delete(Node root, int key) {
+        if (root == null)
+            return root;
+
+        if (key < root.key)
+            root.left = delete(root.left, key);
+        else if (key > root.key)
+            root.right = delete(root.right, key);
+        else {
+            if (root.left == null)
+                return root.right;
+            else if (root.right == null)
+                return root.left;
+
+            root.key = minValue(root.right);
+            root.right = delete(root.right, root.key);
+        }
+
+        return root;
+    }
+
+    int minValue(Node root) {
+        int minValue = root.key;
+        while (root.left != null) {
+            minValue = root.left.key;
+            root = root.left;
+        }
+        return minValue;
+    }
+
+    void delete(int key) {
+        root = delete(root, key);
+    }
 }
- 
-   
- 
-//     1
-//   2   3 
-//         4 
-    
- 
-public class Main
-{
-	public static void main(String[] args) {
-		BinaryTree tree = new BinaryTree();
-		
-		
-	tree.insert(1).insert(2).insert(3);
-	
-		tree.inOrder(tree.root);
-		
-	}
+
+public class Main {
+    public static void main(String[] args) {
+        BinaryTree tree = new BinaryTree();
+
+        tree.insert(1)
+         .insert(2)
+         .insert(3)
+         .insert(4)
+         .insert(5)
+         .insert(6)
+         .insert(7);
+
+        System.out.print("Preorder: ");
+        tree.preOrder(tree.root);
+        System.out.println();
+
+        System.out.print("Inorder: ");
+        tree.inOrder(tree.root);
+        System.out.println();
+
+        System.out.print("Postorder: ");
+        tree.postOrder(tree.root);
+        System.out.println();
+
+        int keyToSearch = 3;
+        Node foundNode = tree.search(tree.root, keyToSearch);
+        System.out.println("Search for key " + keyToSearch + ": " + (foundNode != null ? "Found" : "Not Found"));
+
+        int keyToDelete = 7;
+        tree.delete(keyToDelete);
+
+        System.out.println("After deleting key " + keyToDelete + ": ");
+        System.out.print("Inorder: ");
+        tree.inOrder(tree.root);
+        
+        System.out.println("Insert");
+        
+        tree.insert(100);
+        tree.inOrder(tree.root);
+        
+        
+        
+    }
 }
