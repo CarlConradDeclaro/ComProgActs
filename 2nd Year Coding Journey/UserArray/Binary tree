@@ -1,4 +1,6 @@
-  class Node {
+  import java.util.Scanner;
+
+class Node {
     int key;
     Node left, right;
 
@@ -9,7 +11,6 @@
 }
 
 class BinaryTree {
-
     Node root;
 
     BinaryTree() {
@@ -112,49 +113,117 @@ class BinaryTree {
     void delete(int key) {
         root = delete(root, key);
     }
+
+    void traversals(int choice) {
+        switch (choice) {
+            case 1:
+                System.out.print("Inorder Traversal: ");
+                inOrder(root);
+                break;
+            case 2:
+                System.out.print("Preorder Traversal: ");
+                preOrder(root);
+                break;
+            case 3:
+                System.out.print("Postorder Traversal: ");
+                postOrder(root);
+                break;
+            
+        }
+        System.out.println(); // Add a new line for better formatting
+    }
 }
 
 public class Main {
     public static void main(String[] args) {
-        BinaryTree tree = new BinaryTree();
+        Scanner sc = new Scanner(System.in);
 
-        tree.insert(1)
-         .insert(2)
-         .insert(3)
-         .insert(4)
-         .insert(5)
-         .insert(6)
-         .insert(7);
+           boolean run = true;
+        do {
+            BinaryTree tree = new BinaryTree();
 
-        System.out.print("Preorder: ");
-        tree.preOrder(tree.root);
-        System.out.println();
+            boolean onRun = true;
+            System.out.print("Enter root value: ");
+            int rootValue = sc.nextInt();
+            tree.insert(rootValue);
 
-        System.out.print("Inorder: ");
-        tree.inOrder(tree.root);
-        System.out.println();
+            do {
+                System.out.print("Enter value (or -1 to stop): ");
+                int val = sc.nextInt();
+                if (val != -1)
+                    tree.insert(val);
+                else
+                    onRun = false;
+            } while (onRun);
 
-        System.out.print("Postorder: ");
-        tree.postOrder(tree.root);
-        System.out.println();
 
-        int keyToSearch = 3;
-        Node foundNode = tree.search(tree.root, keyToSearch);
-        System.out.println("Search for key " + keyToSearch + ": " + (foundNode != null ? "Found" : "Not Found"));
+        boolean goRun= true;
+        do{
+  
+            System.out.println("Traversals");
+            System.out.println(" 1) Inorder\n 2) Preorder\n 3) Postorder\n 4) Exit");
+            int choice = sc.nextInt();
+            tree.traversals(choice);
+            
+             goRun = choice == 4 ? false : true;
+            
+                         boolean onGo =  goRun == true ? true:false;
+                    while(onGo){
+                          // Offer insert, delete, search options after traversals
+                        System.out.println("Choose operation:");
+                        System.out.println("1) Insert\n2) Delete\n3) Search\n4) Back");
+                        int operationChoice = sc.nextInt();
+                        
+                        switch (operationChoice) {
+                            case 1:
+                                System.out.print("Enter value to insert: ");
+                                int insertValue = sc.nextInt();
+                                tree.insert(insertValue);
+                               
+                                break;
+                            case 2:
+                                System.out.print("Enter value to delete: ");
+                                int deleteValue = sc.nextInt();
+                                tree.delete(deleteValue);
+                                break;
+                            case 3:
+                                System.out.print("Enter value to search: ");
+                                int searchValue = sc.nextInt();
+                                Node result = tree.search(tree.root, searchValue);
+                                if (result != null) {
+                                    System.out.println("Value found in the tree.");
+                                } else {
+                                    System.out.println("Value not found in the tree.");
+                                }
+                                break;
+                            case 4:
+                                 onGo = false;
+                                 break;
+                            default:
+                                System.out.println("Invalid choice!");
+                        }
+                        
+                        if(onGo){
+                         System.out.println("\nTree after operation:");
+                        tree.traversals(choice);
+                        System.out.println();
+                        }
+                        
+                       };
+            
+            
+        }while(goRun);
+           
+          
 
-        int keyToDelete = 7;
-        tree.delete(keyToDelete);
 
-        System.out.println("After deleting key " + keyToDelete + ": ");
-        System.out.print("Inorder: ");
-        tree.inOrder(tree.root);
-        
-        System.out.println("Insert");
-        
-        tree.insert(100);
-        tree.inOrder(tree.root);
-        
-        
-        
+
+
+            // Display the tree after the operation
+
+            System.out.println("Do you want to run again? (Y/N)");
+            sc.nextLine(); // Consume the newline
+            run = sc.nextLine().equalsIgnoreCase("Y");
+        } while (run);
     }
 }
